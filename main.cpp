@@ -10,6 +10,6 @@ int main() {
  std::cin >> card_rank1;
  std::cout<< card_rank1 << "\n";
 
- getValue(card_rank1);
+ std::cout << getValue(card_rank1);
  return 0;
 }

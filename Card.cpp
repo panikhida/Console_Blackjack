@@ -51,17 +51,16 @@ constexpr auto operator+(T e) noexcept {
 // ----------------------- translators overloads end
 
 //get value
-void getValue(Rank rank) {
-    std::cout << "Card rank: " << getRank(rank) << " it gives you ";
+int getValue(Rank rank) {
     switch (rank) {
         case Rank::jack:
         case Rank::queen:
         case Rank::king:
         case Rank::ten:
-            std::cout << "10";
+            return 10;
         case Rank::ace:
-            std::cout << "11";
+            return 11;
         default:
-            std::cout << +rank;
+            return +rank;
     }
 }

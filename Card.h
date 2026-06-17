@@ -82,5 +82,5 @@ std::ostream& operator<<(std::ostream& out, Rank rank);
 std::istream& operator>>(std::istream& in, Rank& rank);
 
 //get points
-void getValue(Rank rank);
+int getValue(Rank rank);
 #endif //CONSOLE_BLACKJACK_HEADER_H
