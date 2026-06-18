@@ -1,4 +1,3 @@
-#include "Card.h"
 #include "includes.h"
 // ----------------------- translators overloads
 

@@ -84,3 +84,10 @@ std::istream& operator>>(std::istream& in, Rank& rank);
 //get points
 int getValue(Rank rank);
 #endif //CONSOLE_BLACKJACK_HEADER_H
+
+// struct
+struct Card {
+    Rank rank {};
+    Suit suit {};
+    int value = getValue(rank);
+};
