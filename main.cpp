@@ -12,5 +12,6 @@ int main() {
  //deck
 Card card1 {Rank::four, Suit::clubs};
  std::cout << "card1: " << card1.rank << card1.suit << ", Value: " << card1.value << "\n";
+ printCard(card1);
  return 0;
 }

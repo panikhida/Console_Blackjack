@@ -63,3 +63,21 @@ int getValue(Rank rank) {
             return +rank;
     }
 }
+
+/*
+┌───────┐
+│ A     │
+│   ♥   │
+│     A │
+└───────┘
+ */
+
+
+
+void printCard(Card card) {
+        std::cout << "┌───────┐\n";
+        std::cout << "│ " << getRank(card.rank) << "     │\n";
+        std::cout << "│   " << getSuit(card.suit) << "   │\n" ;
+        std::cout << "│     " << getRank(card.rank) << " │\n";
+        std::cout << "└───────┘\n" ;
+    }

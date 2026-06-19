@@ -91,3 +91,5 @@ struct Card {
     Suit suit {};
     int value = getValue(rank);
 };
+
+void printCard(Card card);
