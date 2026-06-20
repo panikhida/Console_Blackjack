@@ -10,7 +10,7 @@ int main() {
  // std::cout << "It gives you " << getValue(card_rank1) << " points! \n";
 
  //deck
-Card card1 {Rank::four, Suit::clubs};
+Card card1 {Rank::nine, Suit::clubs};
  std::cout << "card1: " << card1.rank << card1.suit << ", Value: " << card1.value << "\n";
  printCard(card1);
  return 0;

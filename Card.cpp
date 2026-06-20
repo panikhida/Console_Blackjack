@@ -64,20 +64,20 @@ int getValue(Rank rank) {
     }
 }
 
-/*
-┌───────┐
-│ A     │
-│   ♥   │
-│     A │
-└───────┘
- */
-
-
-
 void printCard(Card card) {
-        std::cout << "┌───────┐\n";
-        std::cout << "│ " << getRank(card.rank) << "     │\n";
-        std::cout << "│   " << getSuit(card.suit) << "   │\n" ;
-        std::cout << "│     " << getRank(card.rank) << " │\n";
-        std::cout << "└───────┘\n" ;
+        std::cout << getRank(card.rank) << std::endl;
+        if (card.rank == Rank::ten) {
+            std::cout << "┌───────┐\n";
+            std::cout << "│ " << getRank(card.rank) << "    │\n";
+            std::cout << "│   " << getSuit(card.suit) << "   │\n" ;
+            std::cout << "│    " << getRank(card.rank) << " │\n";
+            std::cout << "└───────┘\n" ;
+        }
+        else {
+            std::cout << "┌───────┐\n";
+            std::cout << "│ " << getRank(card.rank) << "     │\n";
+            std::cout << "│   " << getSuit(card.suit) << "   │\n" ;
+            std::cout << "│     " << getRank(card.rank) << " │\n";
+            std::cout << "└───────┘\n" ;
+        }
     }
