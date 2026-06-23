@@ -3,7 +3,12 @@
 #include <string_view>
 #include <optional>
 
-    enum class Suit {spades, diamonds, hearts, clubs};
+    enum class Suit {
+        spades,
+        diamonds,
+        hearts,
+        clubs};
+
 constexpr std::string_view getSuit(Suit suit) {
     switch (suit) {
         case Suit::spades:
@@ -92,4 +97,6 @@ struct Card {
 };
 
 void printCard(Card card);
+// void printCard(Card card1, Card card2);
+// void printCard(std::vector<Card> cards);
 #endif //CONSOLE_BLACKJACK_HEADER_H
