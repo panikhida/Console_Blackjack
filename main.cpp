@@ -13,6 +13,5 @@ int main() {
 Card card1 {Rank::two, Suit::clubs};
  Card card2 {Rank::two, Suit::hearts};
  std::cout << "card1: " << card1.rank << card1.suit << ", Value: " << card1.value << "\n";
- printCard(card1, card2);
  return 0;
 }
