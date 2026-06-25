@@ -1,4 +1,5 @@
 #include "includes.h"
+#include "deck.h"
 
 int main() {
  std::cout << "CBlackjack \n";
@@ -10,8 +11,15 @@ int main() {
  // std::cout << "It gives you " << getValue(card_rank1) << " points! \n";
 
  //deck
-Card card1 {Rank::two, Suit::clubs};
- Card card2 {Rank::two, Suit::hearts};
+ Card card1 {Rank::two, Suit::clubs};
+ Card card2 {Rank::three, Suit::hearts};
+ Card card3 {Rank::five, Suit::spades};
+ Card card4 {Rank::ace, Suit::diamonds};
+ // c_deck.push_back(card1);
+ // c_deck.push_back(card2);
+ // c_deck.push_back(card3);
+ // c_deck.push_back(card4);
+ // printDeck(c_deck);
  std::cout << "card1: " << card1.rank << card1.suit << ", Value: " << card1.value << "\n";
  return 0;
 }

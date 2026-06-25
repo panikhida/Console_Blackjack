@@ -3,7 +3,5 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Card.h"
-#include "deck.h"
 #include <utility>
 #endif //CONSOLE_BLACKJACK_INCLUDES_H

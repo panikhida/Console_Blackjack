@@ -1,4 +1,5 @@
 #include "includes.h"
+#include "Card.h"
 // ----------------------- translators overloads
     //rank op<<
     std::ostream& operator<<(std::ostream& out, Rank rank)
