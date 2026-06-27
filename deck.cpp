@@ -1,15 +1,14 @@
 #include "includes.h"
 #include "deck.h"
-std::vector<Card> deck;
-void printDeck(const std::vector<Card>& DECK) {
-    if (deck.empty()) {
+void printDeck(const std::vector<Card>& d) {
+    if (d.empty()) {
         std::cout << "Deck is empty" << "\n";
     }
     else {
-        for (auto card : deck)
+        for (auto card : d)
             {
             std::cout << card.rank << card.suit << ", Value == " << card.value << ". \n";
         }
-        std::cout << "\tCapacity: " << deck.capacity() << "Length: " << deck.size() << ". \n";
+        std::cout << "\tCapacity: " << d.capacity() << "Length: " << d.size() << ". \n";
     }
 }

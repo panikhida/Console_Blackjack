@@ -2,7 +2,7 @@
 #define CONSOLE_BLACKJACK_DECK_H
 #include "includes.h"
 #include "Card.h"
-void printDeck(const std::vector<Card>& DECK);
+void printDeck(const std::vector<Card>& d);
 
 
 #endif //CONSOLE_BLACKJACK_DECK_H
