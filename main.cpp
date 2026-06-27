@@ -9,12 +9,22 @@ int main() {
  // std::cin >> card_rank1;
  // std::cout << "Card rank is: " << card_rank1 << "\n";
  // std::cout << "It gives you " << getValue(card_rank1) << " points! \n";
-
  //deck
+ std::vector<Card> deck;
  Card card1 {Rank::two, Suit::clubs};
- Card card2 {Rank::three, Suit::hearts};
- Card card3 {Rank::five, Suit::spades};
+ Card card2 {Rank::ten, Suit::hearts};
+ Card card3 {Rank::jack, Suit::spades};
  Card card4 {Rank::ace, Suit::diamonds};
+ Card card5 {Rank::seven, Suit::hearts};
+ Card card6 {Rank::queen, Suit::clubs};
+ deck.push_back(card1);
+ deck.push_back(card2);
+ deck.push_back(card3);
+ deck.push_back(card4);
+ deck.push_back(card5);
+ deck.push_back(card6);
+ printDeck(deck);
+
  std::cout << "card1: " << card1.rank << card1.suit << ", Value: " << card1.value << "\n";
  return 0;
 }
