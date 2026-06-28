@@ -24,7 +24,6 @@ int main() {
  deck.push_back(card5);
  deck.push_back(card6);
  printDeck(deck);
-
- std::cout << "card1: " << card1.rank << card1.suit << ", Value: " << card1.value << "\n";
+fillDeck(deck);
  return 0;
 }
