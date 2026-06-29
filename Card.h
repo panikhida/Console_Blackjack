@@ -3,11 +3,7 @@
 #include <string_view>
 #include <optional>
 
-    enum class Suit {
-        spades,
-        diamonds,
-        hearts,
-        clubs};
+    enum class Suit {spades, diamonds, hearts, clubs, suits_end};
 
 constexpr std::string_view getSuit(Suit suit) {
     switch (suit) {
@@ -33,7 +29,7 @@ constexpr std::optional<Suit> getSuitInput(std::string_view sv) {
 std::ostream& operator<<(std::ostream& out, Suit suit);
 std::istream& operator>>(std::istream& in, Suit& suit);
 
-    enum class Rank {two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace};
+    enum class Rank {two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace, ranks_end};
 constexpr std::string_view getRank(Rank rank)
 {
     switch (rank) {
@@ -88,7 +84,7 @@ std::istream& operator>>(std::istream& in, Rank& rank);
 
 //get points
 int getValue(Rank rank);
-
+int getValue(Suit suit);
 // struct
 struct Card {
     Rank rank {};

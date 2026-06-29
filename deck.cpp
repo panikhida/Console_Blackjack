@@ -24,12 +24,14 @@
             std::cout << "│Capacity: " << d.capacity() << " Length: " << d.size() << "\n";
         }
     }
+//getValue(Rank::ranks_end)
+//getValue(Suit::suits_end)
         void fillDeck(std::vector<Card>& d) {
             std::cout << "\nFilling deck ...________________\n";
             d.clear();
             std::cout << "Deck cleared ............_______\n";
-                for (int r { 2 }; r < 15; ++r ) {
-                    for (int s { 0 }; s < 4; ++s) {
+                for (int r { 2 }; r < static_cast<int>(Rank::ranks_end); ++r ) {
+                    for (int s { 0 }; s < static_cast<int>(Suit::suits_end); ++s) {
                         Card card;
                         card.rank = static_cast<Rank>(r);
                         card.suit = static_cast<Suit>(s);

@@ -63,6 +63,12 @@ int getValue(Rank rank) {
             return +rank;
     }
 }
+int getValue(Suit suit) {
+        switch (suit) {
+            default:
+                return +suit;
+        }
+    }
 
 void printCard(Card card) {
         std::cout << getRank(card.rank) << std::endl;
