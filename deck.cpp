@@ -25,12 +25,19 @@
         }
     }
     void fillDeck(std::vector<Card>& d) {
-        std::cout << "\nFilling deck...\n--------------------------\n";
-        for (int i { 0 }; i < d.capacity() ; ++i) {
-            for (int r { 0 }; r < 13; ++r ) {
+        std::cout << "\nFilling deck...________________\n";
+        d.clear();
+        std::cout << "Deck cleared............_______\n";
+            for (int r { 2 }; r < 15; ++r ) {
                 for (int s { 0 }; s < 4; ++s) {
-                    
+                    Card card;
+                    card.rank = static_cast<Rank>(r);
+                    card.suit = static_cast<Suit>(s);
+                    d.push_back(card);
+                    std::cout << "Deck size: " << d.size() << std::endl;
+                    std::cout << "Deck capacity: " << d.capacity() << std::endl;
+                    std::cout << card.rank << "\n";
+                    std::cout << card.suit << "\n";
                 }
             }
         }
-    }

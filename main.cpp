@@ -11,6 +11,7 @@ int main() {
  // std::cout << "It gives you " << getValue(card_rank1) << " points! \n";
  //deck
  std::vector<Card> deck;
+ deck.resize(52);
  Card card1 {Rank::two, Suit::clubs};
  Card card2 {Rank::ten, Suit::hearts};
  Card card3 {Rank::jack, Suit::spades};
@@ -23,7 +24,7 @@ int main() {
  deck.push_back(card4);
  deck.push_back(card5);
  deck.push_back(card6);
+ fillDeck(deck);
  printDeck(deck);
-fillDeck(deck);
  return 0;
 }
