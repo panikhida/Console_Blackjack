@@ -20,24 +20,24 @@
                         std::cout << "││   " << card.rank << card.suit << ", Value == " << card.value << "   ││\n";
                     }
             }
-            std::cout << "│Capacity: " << d.capacity() << " Length: " << d.size() << " │\n";
             std::cout << "└──────────────────────┘\n";
+            std::cout << "│Capacity: " << d.capacity() << " Length: " << d.size() << "\n";
         }
     }
-    void fillDeck(std::vector<Card>& d) {
-        std::cout << "\nFilling deck...________________\n";
-        d.clear();
-        std::cout << "Deck cleared............_______\n";
-            for (int r { 2 }; r < 15; ++r ) {
-                for (int s { 0 }; s < 4; ++s) {
-                    Card card;
-                    card.rank = static_cast<Rank>(r);
-                    card.suit = static_cast<Suit>(s);
-                    d.push_back(card);
-                    std::cout << "Deck size: " << d.size() << std::endl;
-                    std::cout << "Deck capacity: " << d.capacity() << std::endl;
-                    std::cout << card.rank << "\n";
-                    std::cout << card.suit << "\n";
+        void fillDeck(std::vector<Card>& d) {
+            std::cout << "\nFilling deck ...________________\n";
+            d.clear();
+            std::cout << "Deck cleared ............_______\n";
+                for (int r { 2 }; r < 15; ++r ) {
+                    for (int s { 0 }; s < 4; ++s) {
+                        Card card;
+                        card.rank = static_cast<Rank>(r);
+                        card.suit = static_cast<Suit>(s);
+                        card.value = getValue(card.rank);
+                        d.push_back(card);
+                    }
                 }
+            d.resize(52);
+            d.shrink_to_fit();
+            std::cout << "Deck filled  ...................\n";
             }
-        }
