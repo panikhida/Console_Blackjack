@@ -88,7 +88,6 @@ void printCard(Card card) {
         }
     }
 
-
 //TODO: UI
 #if 0
 void printCard(Card card, Card card2) {

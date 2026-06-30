@@ -5,5 +5,7 @@ int main() {
  std::vector<Card> deck;
  fillDeck(deck);
  printDeck(deck);
+ shuffleDeck(deck);
+ printDeck(deck);
  return 0;
 }
