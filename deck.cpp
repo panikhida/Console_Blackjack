@@ -30,8 +30,8 @@
             std::cout << "\nFilling deck ...________________\n";
             d.clear();
             std::cout << "Deck cleared ............_______\n";
-                for (int r { 2 }; r < static_cast<int>(Rank::ranks_end); ++r ) {
-                    for (int s { 0 }; s < static_cast<int>(Suit::suits_end); ++s) {
+                for (int r { 2 }; r < std::to_underlying(Rank::ranks_end); ++r ) {
+                    for (int s { 0 }; s < std::to_underlying(Suit::suits_end); ++s) {
                         Card card;
                         card.rank = static_cast<Rank>(r);
                         card.suit = static_cast<Suit>(s);
