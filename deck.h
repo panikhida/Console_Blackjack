@@ -5,4 +5,7 @@
 void printDeck(const std::vector<Card>& d);
 void fillDeck(std::vector<Card>& d);
 void shuffleDeck(std::vector<Card>& d);
+void giveCard(std::vector<Card>& d, std::vector<Card>& d2);
+int calcDeckValue(const std::vector<Card>& d);
+void insertCard(std::vector<Card>& d, Card card);
 #endif //CONSOLE_BLACKJACK_DECK_H
