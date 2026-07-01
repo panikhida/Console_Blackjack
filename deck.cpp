@@ -63,17 +63,11 @@ void insertCard(std::vector<Card>& d, Card card) {
 };
 int calcDeckValue(const std::vector<Card>& d) {
     int sum { 0 };
-    std::cout << "sum = " << sum << "\n";
     for (Card card : d) {
-        std::cout << "for started, sum = " << sum;
-        sum += card.value;
-        std::cout << "Card " << card.rank << card.suit << " added\n";
         if (card.rank == Rank::ace && sum + 11 > 21)  {
-            std::cout << " Ace! \n sum = " << sum << "\n";
             sum = sum - 10;
         }
-        std::cout << "for ended, sum = " << sum;
-
+        sum += card.value;
     }
     return sum;
 }

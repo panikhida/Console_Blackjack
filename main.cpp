@@ -15,6 +15,8 @@ int main() {
   insertCard(deck_plr, card3);
   insertCard(deck_plr, card3);
   insertCard(deck_plr, card3);
+  insertCard(deck_plr, card2);
+  insertCard(deck_plr, card1);
   insertCard(deck_plr, card3);
   printDeck(deck_plr);
   std::cout << calcDeckValue(deck_plr) << " -- deck value \n";
