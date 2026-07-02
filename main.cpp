@@ -11,13 +11,8 @@ int main() {
   shuffleDeck(deck);
   printDeck(deck);
   insertCard(deck_plr, card3);
-  insertCard(deck_plr, card3);
-  insertCard(deck_plr, card3);
-  insertCard(deck_plr, card3);
-  insertCard(deck_plr, card3);
   insertCard(deck_plr, card2);
-  insertCard(deck_plr, card1);
-  insertCard(deck_plr, card3);
+  insertCard(deck_plr, card2);
   printDeck(deck_plr);
   std::cout << calcDeckValue(deck_plr) << " -- deck value \n";
   return 0;
