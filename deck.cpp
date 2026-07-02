@@ -33,9 +33,9 @@ void printDeck(const std::vector<Card>& d) {
 //getValue(Rank::ranks_end)
 //getValue(Suit::suits_end)
 void fillDeck(std::vector<Card>& d) {
-    std::cout << "\nFilling deck ...________________\n";
+    // std::cout << "\nFilling deck ...________________\n";
     d.clear();
-    std::cout << "Deck cleared ............_______\n";
+    // std::cout << "Deck cleared ............_______\n";
     for (int r { 2 }; r < std::to_underlying(Rank::ranks_end); ++r ) {
         for (int s { 0 }; s < std::to_underlying(Suit::suits_end); ++s) {
             Card card;
@@ -47,7 +47,7 @@ void fillDeck(std::vector<Card>& d) {
     }
     d.resize(52);
     d.shrink_to_fit();
-    std::cout << "Deck filled  ...................\n";
+    // std::cout << "Deck filled  ...................\n";
 }
 void shuffleDeck(std::vector<Card>& d) {
     std::ranges::shuffle(d, std::default_random_engine(std::random_device{}()));
