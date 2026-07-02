@@ -89,7 +89,6 @@ void blackjack()
                 std::cout << "Dealer's visible deck value is " << calcDeckValue(deck_dlr, 1) << "\n";
                 std::cout << "Do you want to take another card?(0/1): ";
                 aif = askIfContinue();
-                }
             }
         std::cout << "The dealer opens another card:\n";
         printDeck(deck_dlr, 'd');
