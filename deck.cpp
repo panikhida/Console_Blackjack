@@ -75,3 +75,18 @@ int calcDeckValue(const std::vector<Card>& d) {
     }
     return sum;
 }
+int calcDeckValue(const std::vector<Card>& d, int c) {
+    int sum { 0 };
+    int aces { 0 };
+    for (int i{0}; i < c; ++i) {
+        if (d[i].rank == Rank::ace)  {
+            ++aces;
+        }
+        sum += d[i].value;
+    }
+    while (sum > 21 && aces > 0) {
+        sum -= 10;
+        --aces;
+    }
+    return sum;
+}

@@ -76,8 +76,8 @@ void blackjack()
         std::cout << "Dealer got two cards\n";
         std::cout << "Dealer opens one card\n";
         printCard(deck_dlr, 1);
-        std::cout << "Your deck value is " << calcDeckValue(deck_plr);
-
+        std::cout << "Your deck value is " << calcDeckValue(deck_plr) << " points\n";
+        std::cout << "Dealer's visible deck value is " << calcDeckValue(deck_dlr, 1);
         //end
         deck.clear();
         deck_plr.clear();
