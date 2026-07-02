@@ -87,6 +87,24 @@ void printCard(Card card) {
             std::cout << "└───────┘\n" ;
         }
     }
+void printCard(const std::vector<Card>& d) {
+        for (Card card : d) {
+            if (card.rank == Rank::ten) {
+                std::cout << "┌───────┐\n";
+                std::cout << "│ " << getRank(card.rank) << "    │\n";
+                std::cout << "│   " << getSuit(card.suit) << "   │\n" ;
+                std::cout << "│    " << getRank(card.rank) << " │\n";
+                std::cout << "└───────┘\n" ;
+            }
+            else {
+                std::cout << "┌───────┐\n";
+                std::cout << "│ " << getRank(card.rank) << "     │\n";
+                std::cout << "│   " << getSuit(card.suit) << "   │\n" ;
+                std::cout << "│     " << getRank(card.rank) << " │\n";
+                std::cout << "└───────┘\n" ;
+            }
+        }
+    }
 
 //TODO: UI
 #if 0

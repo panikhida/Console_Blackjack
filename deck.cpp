@@ -10,7 +10,7 @@ void printDeck(const std::vector<Card>& d) {
             std::cout << "Deck is empty" << "\n";
         }
     {
-        std::cout << "          DECK         \n";
+        std::cout << "      |YOUR DECK|         \n";
         std::cout << "==========----==========\n";
         for (auto card : d)
         {
@@ -27,7 +27,7 @@ void printDeck(const std::vector<Card>& d) {
                 }
             }
             std::cout << "└──────────────────────┘\n";
-            std::cout << "│Capacity: " << d.capacity() << " Length: " << d.size() << "\n";
+            //std::cout << "│Capacity: " << d.capacity() << " Length: " << d.size() << "\n";
     }
 }
 //getValue(Rank::ranks_end)
@@ -46,7 +46,6 @@ void fillDeck(std::vector<Card>& d) {
         }
     }
     d.resize(52);
-    d.shrink_to_fit();
     // std::cout << "Deck filled  ...................\n";
 }
 void shuffleDeck(std::vector<Card>& d) {
