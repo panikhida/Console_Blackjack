@@ -90,42 +90,44 @@ void blackjack()
                 std::cout << "Do you want to take another card?(0/1): ";
                 aif = askIfContinue();
             }
+        std::cout << "Quit getting cards\n";
         std::cout << "The dealer opens another card:\n";
         printDeck(deck_dlr, 'd');
         std::cout << "Dealer has " << calcDeckValue(deck_dlr) << " points\n";
         while (calcDeckValue(deck_dlr) < 13) {
             std::cout << "It is less than 13, dealer takes another card.";
             giveCard(deck, deck_dlr);
+            std::cout << "Dealer got a new card!, new dealer's deck value is " << calcDeckValue(deck_dlr);
         }
-
+        printDeck(deck_dlr, 'd');
         std::cout << "\n";
         std::cout << "Calculating winner...\n";
         const int f_dlr {calcDeckValue(deck_dlr)};
         const int f_plr {calcDeckValue(deck_plr)};
 
-        char winner {};
+        char winner { 'u' };
+            if (f_dlr == 21 && f_plr != 21) {
+                winner = 'd';
+            }
+            if (f_dlr < 21 && f_plr < f_dlr) {
+                winner = 'd';
+            }
+            if (f_plr > 21) {
+                winner = 'd';
+            }
+            if (f_plr == 21 && f_dlr != 21 && winner == 'u') {
+                winner = 'p';
+            }
+            if (f_plr < 21 && f_dlr < f_plr && winner == 'u') {
+                winner = 'p';
+            }
+            if (f_dlr == f_plr && winner == 'u') {
+                winner = 't';
+            }
+            if (f_dlr > 21 && winner == 'u') {
+            winner = 'p';
+            }
 
-        if (f_plr > 21) {
-            winner = 'd';
-        }
-        if (f_dlr == 21 && f_plr != 21) {
-            winner = 'd';
-        }
-        if (f_dlr < 21 && f_plr < f_dlr) {
-            winner = 'd';
-        }
-        if (f_dlr > 21) {
-            winner = 'p';
-        }
-        if (f_plr == 21 && f_dlr != 21) {
-            winner = 'p';
-        }
-        if (f_plr < 21 && f_dlr < f_plr) {
-            winner = 'p';
-        }
-        if (f_dlr == f_plr) {
-            winner = 't';
-        }
         switch (winner) {
             case 'd':
                 std::cout << "Dealer won, you lost your bid!\n";
