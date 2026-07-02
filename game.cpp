@@ -46,7 +46,7 @@ int askIfContinue() {
         if (!std::cin || a > 1 || a < 0) {
             std::cin.clear();
             ignoreLine();
-            std::cout << "Incorrect choice, try again (0|1, No|Yes): ";
+            std::cout << "Incorrect choice, try again (0|1): ";
             continue;
         }
         ignoreLine();
@@ -77,7 +77,27 @@ void blackjack()
         std::cout << "Dealer opens one card\n";
         printCard(deck_dlr, 1);
         std::cout << "Your deck value is " << calcDeckValue(deck_plr) << " points\n";
-        std::cout << "Dealer's visible deck value is " << calcDeckValue(deck_dlr, 1);
+        std::cout << "Dealer's visible deck value is " << calcDeckValue(deck_dlr, 1) << "\n";
+        std::cout << "Do you want to take another card?(0/1): ";
+        int aif = askIfContinue();
+            while (aif == 1 && deck_plr.size() < 10) {
+                giveCard(deck, deck_plr);
+                std::cout << "Dealer gave you a card:\n";
+                std::cout << "Your deck updated:\n";
+                printDeck(deck_plr, 'p');
+                std::cout << "Your deck value is " << calcDeckValue(deck_plr) << " points\n";
+                std::cout << "Dealer's visible deck value is " << calcDeckValue(deck_dlr, 1) << "\n";
+
+                std::cout << "Do you want to take another card?(0/1): ";
+                aif = askIfContinue();
+            }
+        std::cout << "The dealer opens another card:\n";
+        printDeck(deck_dlr, 'd');
+        std::cout << "Dealer has " << calcDeckValue(deck_dlr) << " points\n";
+        while (calcDeckValue(deck_dlr) < 13) {
+            std::cout << "It is less than 13, dealer takes another card.";
+        }
+        std::cout << "\n";
         //end
         deck.clear();
         deck_plr.clear();

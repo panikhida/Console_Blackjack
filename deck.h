@@ -3,6 +3,7 @@
 #include "includes.h"
 #include "Card.h"
 void printDeck(const std::vector<Card>& d);
+void printDeck(const std::vector<Card>& d, char who);
 void fillDeck(std::vector<Card>& d);
 void shuffleDeck(std::vector<Card>& d);
 void giveCard(std::vector<Card>& d, std::vector<Card>& d2);

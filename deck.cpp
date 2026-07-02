@@ -8,12 +8,10 @@
 void printDeck(const std::vector<Card>& d) {
     if (d.empty()) {
             std::cout << "Deck is empty" << "\n";
-        }
-    {
-        std::cout << "      |YOUR DECK|         \n";
+    }
+        std::cout << "         |DECK|\n";
         std::cout << "==========----==========\n";
-        for (auto card : d)
-        {
+    for (auto card : d) {
             if (card.value > 9 && card.rank == Rank::ten)
                 {
                     std::cout << "││   " << card.rank << card.suit << ", Value == " << card.value << " ││\n";
@@ -25,10 +23,36 @@ void printDeck(const std::vector<Card>& d) {
             else {
                         std::cout << "││   " << card.rank << card.suit << ", Value == " << card.value << "   ││\n";
                 }
-            }
-            std::cout << "└──────────────────────┘\n";
-            //std::cout << "│Capacity: " << d.capacity() << " Length: " << d.size() << "\n";
     }
+    std::cout << "└──────────────────────┘\n";
+    //std::cout << "│Capacity: " << d.capacity() << " Length: " << d.size() << "\n";
+}
+void printDeck(const std::vector<Card>& d, char who) {
+    if (d.empty()) {
+        std::cout << "Deck is empty" << "\n";
+    }
+    if (who == 'p') {
+        std::cout << "      |YOUR DECK|\n";
+        std::cout << "==========----==========\n";
+    } else {
+        std::cout << "     |DEALER'S DECK|\n";
+        std::cout << "==========----==========\n";
+    }
+    for (auto card : d) {
+        if (card.value > 9 && card.rank == Rank::ten)
+        {
+            std::cout << "││   " << card.rank << card.suit << ", Value == " << card.value << " ││\n";
+        }
+        else if (card.value > 9 || card.rank == Rank::ten)
+        {
+            std::cout << "││   " << card.rank << card.suit << ", Value == " << card.value << "  ││\n";
+        }
+        else {
+            std::cout << "││   " << card.rank << card.suit << ", Value == " << card.value << "   ││\n";
+        }
+    }
+    std::cout << "└──────────────────────┘\n";
+    //std::cout << "│Capacity: " << d.capacity() << " Length: " << d.size() << "\n";
 }
 //getValue(Rank::ranks_end)
 //getValue(Suit::suits_end)
