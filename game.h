@@ -3,4 +3,7 @@
 #include "includes.h"
 #include "deck.h"
 void blackjack();
+bool getBool();
+int askIfContinue();
+int getInt();
 #endif //CONSOLE_BLACKJACK_GAME_H

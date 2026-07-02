@@ -94,6 +94,7 @@ struct Card {
 
 void printCard(Card card);
 void printCard(const std::vector<Card>& d);
+void printCard(const std::vector<Card>& d, int c);
 // void printCard(Card card1, Card card2);
 // void printCard(std::vector<Card> cards);
 #endif //CONSOLE_BLACKJACK_HEADER_H
