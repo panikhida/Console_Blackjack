@@ -76,8 +76,8 @@ void shuffleDeck(std::vector<Card>& d) {
     std::ranges::shuffle(d, std::default_random_engine(std::random_device{}()));
     }
 void giveCard(std::vector<Card>& d, std::vector<Card>& d2) {
-    d2.push_back(d.back());
-    d.pop_back();
+        d2.push_back(d.back());
+        d.pop_back();
 }
 
 void insertCard(std::vector<Card>& d, Card card) {
@@ -96,6 +96,9 @@ int calcDeckValue(const std::vector<Card>& d) {
     while (sum > 21 && aces > 0) {
         sum -= 10;
         --aces;
+    }
+    if (sum > 21) {
+        std::cout << "Amount of points is more than 21.\n";
     }
     return sum;
 }

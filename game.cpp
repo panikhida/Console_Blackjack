@@ -42,6 +42,8 @@ int getInt() {
 int askIfContinue() {
     while (true) {
         int a;
+        bool b;
+        std::cout << "Do you want to take a card? (0|1)";
         std::cin >> a;
         if (!std::cin || a > 1 || a < 0) {
             std::cin.clear();
@@ -50,7 +52,13 @@ int askIfContinue() {
             continue;
         }
         ignoreLine();
-        return a;
+        if (a == 1) {
+            b = true;
+        }
+        else {
+        b = false;
+        }
+        return b;
     }
 }
 
@@ -78,17 +86,16 @@ void blackjack()
         printCard(deck_dlr, 1);
         std::cout << "Your deck value is " << calcDeckValue(deck_plr) << " points\n";
         std::cout << "Dealer's visible deck value is " << calcDeckValue(deck_dlr, 1) << "\n";
-        std::cout << "Do you want to take another card?(0/1): ";
-        int aif = askIfContinue();
-            while (aif == 1 && calcDeckValue(deck_plr) < 21) {
-                giveCard(deck, deck_plr);
-                std::cout << "Dealer gave you a card:\n";
-                std::cout << "Your deck updated:\n";
-                printDeck(deck_plr, 'p');
-                std::cout << "Your deck value is " << calcDeckValue(deck_plr) << " points\n";
-                std::cout << "Dealer's visible deck value is " << calcDeckValue(deck_dlr, 1) << "\n";
-                std::cout << "Do you want to take another card?(0/1): ";
-                aif = askIfContinue();
+            while (askIfContinue() && calcDeckValue(deck_plr) < 21) {
+                // if (askIfContinue())
+
+                    giveCard(deck, deck_plr);
+                    std::cout << "Dealer gave you a card:\n";
+                    std::cout << "Your deck updated:\n";
+                    printDeck(deck_plr, 'p');
+                    std::cout << "Your deck value is " << calcDeckValue(deck_plr) << " points\n";
+                    std::cout << "Dealer's visible deck value is " << calcDeckValue(deck_dlr, 1) << "\n";
+
             }
         std::cout << "Quit getting cards\n";
         std::cout << "The dealer opens another card:\n";
