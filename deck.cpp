@@ -76,8 +76,12 @@ void shuffleDeck(std::vector<Card>& d) {
     std::ranges::shuffle(d, std::default_random_engine(std::random_device{}()));
     }
 void giveCard(std::vector<Card>& d, std::vector<Card>& d2) {
+    if (calcDeckValue(d2) < 21) {
         d2.push_back(d.back());
         d.pop_back();
+    } else {
+        std::cout << "You are over 21 points, can't take a card..\n";
+    }
 }
 
 void insertCard(std::vector<Card>& d, Card card) {
