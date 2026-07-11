@@ -2,9 +2,6 @@
 #include "deck.h"
 #include <algorithm>
 #include <random>
-//┌ ─ ┐
-//│
-//└ ─ ┘
 void printDeck(const std::vector<Card>& d) {
     if (d.empty()) {
             std::cout << "Deck is empty" << "\n";
