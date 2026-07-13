@@ -43,7 +43,7 @@ int askIfContinue() {
     while (true) {
         int a;
         bool b;
-        std::cout << "Do you want to take a card? (0|1)";
+        std::cout << "Do you want to take a card? (0|1): ";
         std::cin >> a;
         if (!std::cin || a > 1 || a < 0) {
             std::cin.clear();
@@ -74,7 +74,7 @@ void blackjack()
         shuffleDeck(deck);
         std::cout << "\nRound started, your balance is " << cash << "$\nChoose your bid: ";
         bid = getInt();
-        std::cout << "\nYour bid is " << bid << "$\n\n\n\n";
+        std::cout << "\nYour bid is " << bid << "$\n\n";
         giveCard(deck, deck_plr);
         giveCard(deck, deck_plr);
         std::cout << "Deck shuffled... \nDealer gave you two cards: \n";
