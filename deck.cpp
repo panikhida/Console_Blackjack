@@ -77,7 +77,7 @@ void giveCard(std::vector<Card>& d, std::vector<Card>& d2) {
         d2.push_back(d.back());
         d.pop_back();
     } else {
-        std::cout << "You are over 21 points, can't take a card..\n";
+
     }
 }
 
@@ -99,7 +99,7 @@ int calcDeckValue(const std::vector<Card>& d) {
         --aces;
     }
     if (sum > 21) {
-        std::cout << "Amount of points is more than 21.\n";
+
     }
     return sum;
 }

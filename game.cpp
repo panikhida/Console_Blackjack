@@ -74,7 +74,7 @@ void blackjack()
         shuffleDeck(deck);
         std::cout << "\nRound started, your balance is " << cash << "$\nChoose your bid: ";
         bid = getInt();
-        std::cout << "\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\nYour bid is " << bid << "$\n\n\n\n";
+        std::cout << "\nYour bid is " << bid << "$\n\n\n\n";
         giveCard(deck, deck_plr);
         giveCard(deck, deck_plr);
         std::cout << "Deck shuffled... \nDealer gave you two cards: \n";
@@ -86,32 +86,35 @@ void blackjack()
         printCard(deck_dlr, 1);
         std::cout << "Your deck value is " << calcDeckValue(deck_plr) << " points\n";
         std::cout << "Dealer's visible deck value is " << calcDeckValue(deck_dlr, 1) << "\n";
-            while (askIfContinue() && calcDeckValue(deck_plr) < 21) {
-                // if (askIfContinue())
-
+            while (calcDeckValue(deck_plr) < 21) {
+                if (askIfContinue()) {
                     giveCard(deck, deck_plr);
                     std::cout << "Dealer gave you a card:\n";
                     std::cout << "Your deck updated:\n";
                     printDeck(deck_plr, 'p');
                     std::cout << "Your deck value is " << calcDeckValue(deck_plr) << " points\n";
                     std::cout << "Dealer's visible deck value is " << calcDeckValue(deck_dlr, 1) << "\n";
-
+                } else {
+                    break;
+                }
             }
-        std::cout << "Quit getting cards\n";
+
+        std::cout << "Quit getting cards...\n";
+
         std::cout << "The dealer opens another card:\n";
         printDeck(deck_dlr, 'd');
         std::cout << "Dealer has " << calcDeckValue(deck_dlr) << " points\n";
         while (calcDeckValue(deck_dlr) < 13) {
-            std::cout << "It is less than 13, dealer takes another card.";
+            std::cout << "It is less than 13, dealer takes another card.\n";
             giveCard(deck, deck_dlr);
             std::cout << "Dealer got a new card!, new dealer's deck value is " << calcDeckValue(deck_dlr);
         }
-        printDeck(deck_dlr, 'd');
+
+        //endgame
         std::cout << "\n";
         std::cout << "Calculating winner...\n";
         const int f_dlr {calcDeckValue(deck_dlr)};
         const int f_plr {calcDeckValue(deck_plr)};
-
         char winner { 'u' };
             if (f_dlr == 21 && f_plr != 21) {
                 winner = 'd';
