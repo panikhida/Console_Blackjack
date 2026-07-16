@@ -6,4 +6,5 @@ void blackjack();
 bool getBool();
 int askIfContinue();
 int getInt();
+int getInt(int mn, int mx);
 #endif //CONSOLE_BLACKJACK_GAME_H
