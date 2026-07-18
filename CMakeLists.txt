@@ -10,4 +10,6 @@ add_executable(Console_Blackjack main.cpp
         includes.h
         Card.cpp
         deck.h
-        game.h)
+        game.h
+        BTUI.cpp
+        BTUI.h)

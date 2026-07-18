@@ -123,39 +123,3 @@ void printCard(const std::vector<Card>& d, int c) {
                 }
             }
         }
-
-
-//TODO: UI
-#if 0
-void printCard(Card card, Card card2) {
-        std::
-        if (card.rank == Rank::ten) {
-            std::cout << "┌───────┐  ┌───────┐\n";
-            std::cout << "│ " << getRank(card.rank) << "    │  │ " << getRank(card2.rank) << "    │\n";
-            std::cout << "│   " << getSuit(card.suit) << "   │  │   " << getSuit(card2.suit) << "   │\n";
-            std::cout << "│    " << getRank(card.rank) << " │  │    " << getRank(card2.rank) << " │\n";
-            std::cout << "└───────┘  └───────┘\n" ;
-        }
-        else {
-            std::cout << "┌───────┐  ┌───────┐\n";
-            std::cout << "│ " << getRank(card.rank) << "     │  │ " << getRank(card2.rank) << "     │\n";
-            std::cout << "│   " << getSuit(card.suit) << "   │  │   " << getSuit(card2.suit) << "   │\n";
-            std::cout << "│     " << getRank(card.rank) << " │  │     " << getRank(card2.rank)<< " │\n";
-            std::cout << "└───────┘  └───────┘\n" ;
-        }
-    }
-//test
-    Card card1(Rank::eight, Suit::hearts);
-    Card card2(Rank::eight, Suit::hearts);
-    Card card3(Rank::eight, Suit::hearts);
-    std::vector<Card> cards {card1, card2, card3};
-//test
-void printCard(std::vector<Card> cards) {
-            for (auto& card : cards) {
-                std::cout << "┌───────┐  ";
-            }
-            for (auto& card : cards) {
-                std::cout << "│ " << getRank(card.rank) << "    │";
-            }
-        }
-#endif
