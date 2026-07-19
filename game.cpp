@@ -85,7 +85,6 @@ void blackjack() {
     std::vector<Card> deck_plr;
     std::vector<Card> deck_dlr;
     while (cash > 0) {
-        gameStart:
         auto bid { 0 };
         fillDeck(deck);
         shuffleDeck(deck);
