@@ -1,13 +1,14 @@
-//
-// Created by panikhida on 7/18/26.
-//
-
 #ifndef CONSOLE_BLACKJACK_BTUI_H
 #define CONSOLE_BLACKJACK_BTUI_H
+#include <termios.h>
+class BTUI {
+        public:
+            ~BTUI();
+            void enableRaw();
+            void disableRaw();
+        private:
+    struct termios m_orig_termios {};
+};
 
-namespace BTUI {
-    class BTUI {
-    };
-} // BTUI
 
 #endif //CONSOLE_BLACKJACK_BTUI_H
