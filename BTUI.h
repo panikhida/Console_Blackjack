@@ -1,6 +1,7 @@
 #ifndef CONSOLE_BLACKJACK_BTUI_H
 #define CONSOLE_BLACKJACK_BTUI_H
 #include <termios.h>
+// btui class help me
 class BTUI {
         public:
             ~BTUI();
