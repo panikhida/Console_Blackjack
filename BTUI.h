@@ -10,5 +10,4 @@ class BTUI {
     struct termios m_orig_termios {};
 };
 
-
 #endif //CONSOLE_BLACKJACK_BTUI_H
