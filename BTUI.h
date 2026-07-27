@@ -5,6 +5,7 @@
 class BTUI {
         public:
             ~BTUI();
+            void die(const char* s);
             void enableRaw();
             void disableRaw();
         private:

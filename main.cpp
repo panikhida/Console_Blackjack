@@ -5,10 +5,19 @@ int main() {
   BTUI tui;
   tui.enableRaw();
 
-  char c;
-  while (read(STDIN_FILENO, &c, 1) == 1 && c != 'q') {
+  while (true) {
+    char c = '\0';
+    read(STDIN_FILENO, &c, 1);
+
+    if (iscntrl(c)) {
+      // std::cout << "[" << static_cast<int>(c) << "] | (" << c << ") " << &c << "\n";
+      printf("&d\r\n", c);
+    } else {
+      // std::cout << "[" << static_cast<int>(c) << "] | (" << c << ") " << &c << "\n";
+      printf("%d ('%c')\r\n", c, c  );
+    }
+    if (c == 'q') break;
 
   }
-
   return 0;
 }
