@@ -11,5 +11,9 @@ add_executable(Console_Blackjack main.cpp
         Card.cpp
         deck.h
         game.h
-        BTUI.cpp
-        BTUI.h)
+        btui/src/BTUI.cpp
+        btui/includes/BTUI.h
+        btui/includes/formats.h
+        btui/src/formats.cpp
+        btui/src/converter.cpp
+        btui/includes/converter.h)
