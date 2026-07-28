@@ -1,10 +1,11 @@
 #include "includes.h"
 #include <unistd.h>
-#include "BTUI.h"
+#include "btui/includes/BTUI.h"
 int main() {
   BTUI tui;
-  tui.enableRaw();
+  std::cout << "\e[0;36m";
 
+  tui.enableRaw();
   while (true) {
     char c = '\0';
     if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN) tui.die("read");
