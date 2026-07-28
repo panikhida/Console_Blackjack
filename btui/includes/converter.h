@@ -1,0 +1,8 @@
+//
+// Created by panikhida on 7/28/26.
+//
+
+#ifndef CONSOLE_BLACKJACK_CONVERTER_H
+#define CONSOLE_BLACKJACK_CONVERTER_H
+
+#endif //CONSOLE_BLACKJACK_CONVERTER_H
