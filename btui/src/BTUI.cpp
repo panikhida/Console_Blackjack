@@ -30,12 +30,16 @@ void BTUI::die(const char* s) {
             die("tcsktattr");
     }
 
+void BTUI::resetClr() {
+    std::cout << "\x1b[0m";
+}
+
 void BTUI::getClr() {
     std::cout << "setclr wip";
 }
 
-void BTUI::setClr() {
-    std::cout << "setclr wip";
+void BTUI::setClr(int c) {
+    std::cout << "\x1b["<<c<<"m\r\n";
 }
 
 BTUI::~BTUI() {

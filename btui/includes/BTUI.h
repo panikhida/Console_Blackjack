@@ -9,9 +9,10 @@ class BTUI {
             static void die(const char* s);
             void enableRaw();
             constexpr void disableRaw() const;
-            // wip
+
+            static void resetClr();
             static void getClr();
-            static void setClr();
+            static void setClr(int c);
         private:
     struct termios m_orig_termios {};
 };
