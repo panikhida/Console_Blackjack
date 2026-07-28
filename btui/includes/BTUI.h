@@ -6,13 +6,12 @@
 class BTUI {
         public:
             ~BTUI();
-            void die(const char* s);
+            static void die(const char* s);
             void enableRaw();
-            void disableRaw();
+            constexpr void disableRaw() const;
             // wip
-            void 
-            void getClr();
-            void setClr();
+            static void getClr();
+            static void setClr();
         private:
     struct termios m_orig_termios {};
 };

@@ -3,10 +3,8 @@
 #include <unistd.h>
 #include <cstdlib>
 #include <cstdio>
-#include <cerrno>
-#include <cctype>
-#include "BTUI.h"
-    void BTUI::die(const char* s) {
+#include "../includes/BTUI.h"
+void BTUI::die(const char* s) {
         perror(s);
         exit(1);
     }
@@ -27,11 +25,19 @@
         if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1) die("tcsetattr");
     }
 
-    void BTUI::disableRaw() {
+    constexpr void BTUI::disableRaw() const {
         if (tcsetattr (STDIN_FILENO, TCSAFLUSH, &m_orig_termios) == -1)
             die("tcsktattr");
     }
 
-    BTUI::~BTUI() {
+void BTUI::getClr() {
+    std::cout << "setclr wip";
+}
+
+void BTUI::setClr() {
+    std::cout << "setclr wip";
+}
+
+BTUI::~BTUI() {
          disableRaw();
      }
