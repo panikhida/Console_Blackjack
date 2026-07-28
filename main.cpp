@@ -7,17 +7,13 @@ int main() {
 
   while (true) {
     char c = '\0';
-    read(STDIN_FILENO, &c, 1);
-
+    if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN) tui.die("read");
     if (iscntrl(c)) {
-      // std::cout << "[" << static_cast<int>(c) << "] | (" << c << ") " << &c << "\n";
-      printf("&d\r\n", c);
+      std::cout << static_cast<unsigned int>(c) << "\r\n";
     } else {
-      // std::cout << "[" << static_cast<int>(c) << "] | (" << c << ") " << &c << "\n";
-      printf("%d ('%c')\r\n", c, c  );
+      std::cout << static_cast<int>(c) << "(" << c << ")\r\n";
     }
     if (c == 'q') break;
-
   }
   return 0;
 }

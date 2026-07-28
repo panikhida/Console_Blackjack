@@ -12,7 +12,8 @@
     }
 
      void BTUI::enableRaw() {
-         tcgetattr(STDIN_FILENO, &m_orig_termios);
+         if (tcgetattr(STDIN_FILENO, &m_orig_termios) == -1) die("tcgetattr");
+        tcgetattr(STDIN_FILENO, &m_orig_termios);
          struct termios raw = m_orig_termios;
 
          tcgetattr(STDIN_FILENO, &raw);
@@ -23,12 +24,13 @@
          raw.c_cc[VMIN] = 0;
          raw.c_cc[VTIME] = 1;
 
-        tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+        if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1) die("tcsetattr");
     }
 
     void BTUI::disableRaw() {
-         tcsetattr(STDIN_FILENO, TCSAFLUSH, &m_orig_termios);
-     }
+        if (tcsetattr (STDIN_FILENO, TCSAFLUSH, &m_orig_termios) == -1)
+            die("tcsktattr");
+    }
 
     BTUI::~BTUI() {
          disableRaw();

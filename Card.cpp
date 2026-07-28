@@ -73,53 +73,53 @@ int getValue(Suit suit) {
 void printCard(Card card) {
         std::cout << getRank(card.rank) << std::endl;
         if (card.rank == Rank::ten) {
-            std::cout << "┌───────┐\n";
-            std::cout << "│ " << getRank(card.rank) << "    │\n";
-            std::cout << "│   " << getSuit(card.suit) << "   │\n" ;
-            std::cout << "│    " << getRank(card.rank) << " │\n";
-            std::cout << "└───────┘\n" ;
+            std::cout << "┌───────┐\r\n";
+            std::cout << "│ " << getRank(card.rank) << "    │\r\n";
+            std::cout << "│   " << getSuit(card.suit) << "   │\r\n" ;
+            std::cout << "│    " << getRank(card.rank) << " │\r\n";
+            std::cout << "└───────┘\r\n" ;
         }
         else {
-            std::cout << "┌───────┐\n";
-            std::cout << "│ " << getRank(card.rank) << "     │\n";
-            std::cout << "│   " << getSuit(card.suit) << "   │\n" ;
-            std::cout << "│     " << getRank(card.rank) << " │\n";
-            std::cout << "└───────┘\n" ;
+            std::cout << "┌───────┐\r\n";
+            std::cout << "│ " << getRank(card.rank) << "     │\r\n";
+            std::cout << "│   " << getSuit(card.suit) << "   │\r\n" ;
+            std::cout << "│     " << getRank(card.rank) << " │\r\n";
+            std::cout << "└───────┘\r\n" ;
         }
     }
 void printCard(const std::vector<Card>& d) {
         for (Card card : d) {
             if (card.rank == Rank::ten) {
-                std::cout << "┌───────┐\n";
-                std::cout << "│ " << getRank(card.rank) << "    │\n";
-                std::cout << "│   " << getSuit(card.suit) << "   │\n" ;
-                std::cout << "│    " << getRank(card.rank) << " │\n";
-                std::cout << "└───────┘\n" ;
+                std::cout << "┌───────┐\r\n";
+                std::cout << "│ " << getRank(card.rank) << "    │\r\n";
+                std::cout << "│   " << getSuit(card.suit) << "   │\r\n" ;
+                std::cout << "│    " << getRank(card.rank) << " │\r\n";
+                std::cout << "└───────┘\r\n" ;
             }
             else {
-                std::cout << "┌───────┐\n";
-                std::cout << "│ " << getRank(card.rank) << "     │\n";
-                std::cout << "│   " << getSuit(card.suit) << "   │\n" ;
-                std::cout << "│     " << getRank(card.rank) << " │\n";
-                std::cout << "└───────┘\n" ;
+                std::cout << "┌───────┐\r\n";
+                std::cout << "│ " << getRank(card.rank) << "     │\r\n";
+                std::cout << "│   " << getSuit(card.suit) << "   │\r\n" ;
+                std::cout << "│     " << getRank(card.rank) << " │\r\n";
+                std::cout << "└───────┘\r\n" ;
             }
         }
     }
 void printCard(const std::vector<Card>& d, int c) {
         for (int i {0}; i < c; ++i) {
             if (d[i].rank == Rank::ten) {
-                std::cout << "┌───────┐\n";
-                std::cout << "│ " << getRank(d[i].rank) << "    │\n";
-                std::cout << "│   " << getSuit(d[i].suit) << "   │\n" ;
-                std::cout << "│    " << getRank(d[i].rank) << " │\n";
-                std::cout << "└───────┘\n" ;
+                std::cout << "┌───────┐\r\n";
+                std::cout << "│ " << getRank(d[i].rank) << "    │\r\n";
+                std::cout << "│   " << getSuit(d[i].suit) << "   │\r\n" ;
+                std::cout << "│    " << getRank(d[i].rank) << " │\r\n";
+                std::cout << "└───────┘\r\n" ;
             }
             else {
-                std::cout << "┌───────┐\n";
-                std::cout << "│ " << getRank(d[i].rank) << "     │\n";
-                std::cout << "│   " << getSuit(d[i].suit) << "   │\n" ;
-                std::cout << "│     " << getRank(d[i].rank) << " │\n";
-                std::cout << "└───────┘\n" ;
+                std::cout << "┌───────┐\r\n";
+                std::cout << "│ " << getRank(d[i].rank) << "     │\r\n";
+                std::cout << "│   " << getSuit(d[i].suit) << "   │\r\n" ;
+                std::cout << "│     " << getRank(d[i].rank) << " │\r\n";
+                std::cout << "└───────┘\r\n" ;
                 }
             }
         }
