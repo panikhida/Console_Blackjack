@@ -1,5 +1,6 @@
 #ifndef CONSOLE_BLACKJACK_BTUI_H
 #define CONSOLE_BLACKJACK_BTUI_H
+#include "formats.h"
 #include <termios.h>
 
 // btui class help me

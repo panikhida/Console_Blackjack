@@ -1,10 +1,11 @@
 #include "includes.h"
 #include <unistd.h>
 #include "btui/includes/BTUI.h"
+using enum Color;
 int main() {
   BTUI tui;
 
-  BTUI::setClr(32);
+  BTUI::setClr(Clr(green));
 
   tui.enableRaw();
   while (true) {
