@@ -13,7 +13,7 @@ int main() {
   while (true) {
     tui.initUI();
     BTUI::refreshScreen();
-    tui.p_drawBox();
+    // tui.p_drawBox();
     BTUI::processKeypress();
   }
 }

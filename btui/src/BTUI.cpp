@@ -6,8 +6,7 @@
 #include "../includes/BTUI.h"
 #include "sys/ioctl.h"
 #include <string>
-
-
+#include <string_view>
 
 /*** basic ***/
 BTUI::~BTUI() {
@@ -15,6 +14,7 @@ BTUI::~BTUI() {
 }
 void BTUI::initUI() {
     if (getTSize(&E.scrHeight, &E.scrLength) == -1) die("getSize");
+    buf.reserve(4096);
 }
 char BTUI::readKey() {
     int nread;
@@ -49,6 +49,15 @@ void BTUI::die(const char* s) {
     exit(1);
 }
 
+/*** Buffer ***/
+void BTUI::bufAppend(std::string_view t) {
+   buf.append(t);
+}
+
+void BTUI::bufClear() {
+    buf.erase();
+}
+
 /*** Gets ***/
 int BTUI::getTSize(int *height, int *length) {
     struct winsize ws {};
@@ -61,19 +70,18 @@ int BTUI::getTSize(int *height, int *length) {
         return 0;
     }
 }
-
+std::string_view nl {"\r\n"};
 /*** Paints ***/
-void BTUI::p_drawLBorder(char c) const {
+void BTUI::p_drawLBorder(std::string_view c)  {
     for (int y{0}; y < E.scrHeight;++y) {
-        write(STDOUT_FILENO, &c, 1);
+        bufAppend(c);
         if (y < E.scrHeight - 1) {
-            write(STDOUT_FILENO, "\r\n", 2);
+            bufAppend(nl);
         }
     }
-    write(STDOUT_FILENO, "\x1b[H", 3);
+    bufAppend("\x1b[H");
 }
 void BTUI::p_drawBox() const {
-
     write(STDOUT_FILENO, "╭", 4);
 
     for (int y{0}; y < E.scrLength * 2 - 4; ++y) {
@@ -82,7 +90,7 @@ void BTUI::p_drawBox() const {
     }
     write(STDOUT_FILENO, "╮", 4);
 }
-
+    
 /*** raw ***/
 void BTUI::enableRaw() {
          if (tcgetattr(STDIN_FILENO, &E.m_orig_termios) == -1) die("tcgetattr");
