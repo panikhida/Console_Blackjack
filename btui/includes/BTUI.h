@@ -25,8 +25,8 @@ public:
 
     /*** paints ***/
     void p_drawLBorder(std::string_view c);
-    void p_drawBox() const;
-
+    void p_drawBox();
+    void renderUi() const;
     /*** raw ***/
     void enableRaw();
     constexpr void disableRaw() const;
@@ -39,7 +39,7 @@ public:
     std::string buf{};
 
 private:
-    std::size_t buf_s {2048};
+    // std::size_t buf_s {2048};
 
     struct Config {
         int scrHeight{0};

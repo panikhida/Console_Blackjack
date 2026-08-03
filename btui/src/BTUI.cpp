@@ -11,10 +11,15 @@
 /*** basic ***/
 BTUI::~BTUI() {
     disableRaw();
+    buf.clear();
+    std::string_view onex = "\x1b[?25h\x1b[?1049l";
+    write(STDOUT_FILENO, &onex, onex.size());
 }
 void BTUI::initUI() {
+    write(STDOUT_FILENO, "\x1b[?1049h\x1b[?25l\x1b[32m", 15);
     if (getTSize(&E.scrHeight, &E.scrLength) == -1) die("getSize");
     buf.reserve(4096);
+    bufAppend("\x1b[32m");
 }
 char BTUI::readKey() {
     int nread;
@@ -44,6 +49,7 @@ void BTUI::refreshScreen() {
 void BTUI::die(const char* s) {
     write(STDOUT_FILENO, "\x1b[2J", 4);
     write(STDOUT_FILENO,"\x1b[H", 3);
+    write(STDOUT_FILENO, "\x1b[?25h", 4);
 
     perror(s);
     exit(1);
@@ -55,7 +61,9 @@ void BTUI::bufAppend(std::string_view t) {
 }
 
 void BTUI::bufClear() {
-    buf.erase();
+    buf.clear();
+    write(STDOUT_FILENO, "\x1b[H", 3);
+    bufAppend("\x1b[32m");
 }
 
 /*** Gets ***/
@@ -70,7 +78,30 @@ int BTUI::getTSize(int *height, int *length) {
         return 0;
     }
 }
+
 std::string_view nl {"\r\n"};
+
+void BTUI::p_drawBox() {
+    buf.clear();
+
+    bufAppend("\x1b[32m");
+    bufAppend("╭");
+
+    for (int y{0}; y < E.scrLength - 2; ++y) bufAppend("━");
+    bufAppend("╮\r\n");
+    for (int y{0}; y < E.scrHeight - 2; ++y) {
+        bufAppend("|");
+        for (int s{0}; s < E.scrLength - 2; ++s) {
+            bufAppend(".");
+        }
+        bufAppend("|\r\n");
+    }
+    bufAppend("╰");
+    for (int y{0}; y < E.scrLength - 2; ++y) bufAppend("━");
+    bufAppend("╯");
+
+}
+
 /*** Paints ***/
 void BTUI::p_drawLBorder(std::string_view c)  {
     for (int y{0}; y < E.scrHeight;++y) {
@@ -81,14 +112,12 @@ void BTUI::p_drawLBorder(std::string_view c)  {
     }
     bufAppend("\x1b[H");
 }
-void BTUI::p_drawBox() const {
-    write(STDOUT_FILENO, "╭", 4);
 
-    for (int y{0}; y < E.scrLength * 2 - 4; ++y) {
-        write(STDOUT_FILENO, "━", 4);
-        ++y;
-    }
-    write(STDOUT_FILENO, "╮", 4);
+void BTUI::renderUi() const {
+    refreshScreen();
+
+    write(STDOUT_FILENO, "\x1b[H", 3);
+    write(1, buf.data(), buf.size());
 }
     
 /*** raw ***/
@@ -114,11 +143,10 @@ constexpr void BTUI::disableRaw() const {
 
 /*** Color ***/
 void BTUI::resetClr() {
-    std::cout << "\x1b[0m";
+    write(STDOUT_FILENO, "\x1b[0m", 4);
 }
 void BTUI::getClr() {
     std::cout << "setclr wip";
 }
 void BTUI::setClr(int c) {
-    std::cout << "\x1b["<<c<<"m\r\n";
 }

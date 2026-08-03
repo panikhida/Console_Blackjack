@@ -8,12 +8,12 @@
 using enum Color;
 int main() {
   BTUI tui;
-  BTUI::setClr(Clr(green));
+  // BTUI::setClr(Clr(green));
   tui.enableRaw();
+  tui.initUI();
   while (true) {
-    tui.initUI();
-    BTUI::refreshScreen();
-    // tui.p_drawBox();
+    tui.p_drawBox();
+    tui.renderUi();
     BTUI::processKeypress();
   }
 }
