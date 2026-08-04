@@ -13,7 +13,9 @@ int main() {
   tui.initUI();
   while (true) {
     tui.p_drawBox();
-    tui.renderUi();
-    BTUI::processKeypress();
+
+
+    if (tui.needRender) tui.renderUi();
+    tui.processKeypress();
   }
 }

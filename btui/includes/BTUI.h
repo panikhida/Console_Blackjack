@@ -11,7 +11,7 @@ public:
     ~BTUI();
     void initUI();
     static char readKey();
-    static void processKeypress();
+    void processKeypress();
     static void refreshScreen();
     static void die(const char* s);
 
@@ -37,10 +37,10 @@ public:
     static void setClr(int c);
 
     std::string buf{};
+    bool needRender{false};
 
 private:
     // std::size_t buf_s {2048};
-
     struct Config {
         int scrHeight{0};
         int scrLength{0};

@@ -12,7 +12,7 @@
 BTUI::~BTUI() {
     disableRaw();
     buf.clear();
-    std::string_view onex = "\x1b[?25h\x1b[?1049l";
+    std::string_view onex = "\x1b[0m\x1b[?25h\x1b[?1049l";
     write(STDOUT_FILENO, &onex, onex.size());
 }
 void BTUI::initUI() {
@@ -29,17 +29,22 @@ char BTUI::readKey() {
             die("read");
         }
     }
-    return c;
+    return (nread == 1) ? c : '\0';
 }
 void BTUI::processKeypress() {
-    switch (readKey()) {
-        case CTRL('q'):
+    char cc = readKey();
+    if (cc == '\0') return;
+    switch (cc) {
+        case CTRL('q'): {
+            buf.clear();
             write(STDOUT_FILENO, "\x1b[2J", 4);
             write(STDOUT_FILENO,"\x1b[H", 3);
-
+            write(STDOUT_FILENO, "\x1b[0m\x1b[?25h\x1b[?1049l", 19);
+            disableRaw();
             exit(0);
+        }
         default:
-            break;
+        break;
     }
 }
 void BTUI::refreshScreen() {
@@ -83,7 +88,7 @@ std::string_view nl {"\r\n"};
 
 void BTUI::p_drawBox() {
     buf.clear();
-
+    std::string_view welcome {"BlackJack"};
     bufAppend("\x1b[32m");
     bufAppend("╭");
 
@@ -91,14 +96,18 @@ void BTUI::p_drawBox() {
     bufAppend("╮\r\n");
     for (int y{0}; y < E.scrHeight - 2; ++y) {
         bufAppend("|");
-        for (int s{0}; s < E.scrLength - 2; ++s) {
+        for (int s{0}; s < E.scrLength - welcome.size() - 2; ++s) {
             bufAppend(".");
+            if (s == E.scrLength / 2 - welcome.size() / 2 - 2) {
+                bufAppend(welcome);
+            }
         }
         bufAppend("|\r\n");
     }
     bufAppend("╰");
     for (int y{0}; y < E.scrLength - 2; ++y) bufAppend("━");
     bufAppend("╯");
+    needRender = true;
 
 }
 
@@ -113,9 +122,8 @@ void BTUI::p_drawLBorder(std::string_view c)  {
     bufAppend("\x1b[H");
 }
 
-void BTUI::renderUi() const {
+void BTUI::renderUi() const{
     refreshScreen();
-
     write(STDOUT_FILENO, "\x1b[H", 3);
     write(1, buf.data(), buf.size());
 }
@@ -137,10 +145,8 @@ void BTUI::enableRaw() {
         if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1) die("tcsetattr");
     }
 constexpr void BTUI::disableRaw() const {
-        if (tcsetattr (STDIN_FILENO, TCSAFLUSH, &E.m_orig_termios) == -1)
-            die("tcsetattr");
-    }
-
+    tcsetattr (STDIN_FILENO, TCSAFLUSH, &E.m_orig_termios);
+}
 /*** Color ***/
 void BTUI::resetClr() {
     write(STDOUT_FILENO, "\x1b[0m", 4);
