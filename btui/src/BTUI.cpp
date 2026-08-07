@@ -28,7 +28,7 @@ void BTUI::initUI() {
         paint = static_cast<Paint>(r);
         g_paintsAll.push_back(paint);
     }
-    p_curr = Paint::p_begin;
+    p_curr = Paint::p_main;
 }
 char BTUI::readKey() {
     ssize_t nread;
@@ -71,6 +71,26 @@ void BTUI::die(const char* s) {
     exit(1);
 }
 
+/*** raw ***/
+void BTUI::enableRaw() {
+    if (tcgetattr(STDIN_FILENO, &E.m_orig_termios) == -1) die("tcgetattr");
+    tcgetattr(STDIN_FILENO, &E.m_orig_termios);
+    struct termios raw = E.m_orig_termios;
+
+    tcgetattr(STDIN_FILENO, &raw);
+    raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+    raw.c_oflag &= ~(OPOST);
+    raw.c_cflag &= ~(CS8);
+    raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
+    raw.c_cc[VMIN] = 0;
+    raw.c_cc[VTIME] = 1;
+
+    if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1) die("tcsetattr");
+}
+constexpr void BTUI::disableRaw() const {
+    tcsetattr (STDIN_FILENO, TCSAFLUSH, &E.m_orig_termios);
+}
+
 /*** Buffer ***/
 void BTUI::bufAppend(std::string_view t) {
    buf.append(t);
@@ -85,8 +105,6 @@ void BTUI::bufAppend(Paint p) {
     text += getPaint(p, E.scrHeight, E.scrLength);
     buf.append(text);
 }
-
-
 void BTUI::bufClear() {
     buf.clear();
     write(STDOUT_FILENO, "\x1b[H", 3);
@@ -119,31 +137,6 @@ void BTUI::checkSize() {
     }
 }
 std::string_view nl {"\r\n"};
-
-// void BTUI::p_drawBox() {
-//     buf.clear();
-//     std::string_view welcome {"BlackJack"};
-//     bufAppend("\x1b[32m");
-//     bufAppend("╭");
-//
-//     for (int y{0}; y < E.scrLength - 2; ++y) bufAppend("━");
-//     bufAppend("╮\r\n");
-//     for (int y{0}; y < E.scrHeight - 2; ++y) {
-//         bufAppend("|");
-//         for (int s{0}; s < E.scrLength - welcome.size() - 2; ++s) {
-//             bufAppend(".");
-//             if (s == E.scrLength / 2 - welcome.size() / 2 - 2) {
-//                 bufAppend(welcome);
-//             }
-//         }
-//         bufAppend("|\r\n");
-//     }
-//     bufAppend("╰");
-//     for (int y{0}; y < E.scrLength - 2; ++y) bufAppend("━");
-//     bufAppend("╯");
-//     needRender = true;
-//
-// }
 
 /*** Paints ***/
 void BTUI::setPaint(Paint paint) {
@@ -196,14 +189,12 @@ void BTUI::setPaint(Paint paint) {
             break;
     }
 }
-
 void BTUI::renderUi() {
     refreshScreen();
     write(STDOUT_FILENO, "\x1b[H", 3);
     write(1, buf.data(), buf.size());
     needRender = false;
 }
-
 void BTUI::nextPaint() {
     bufClear();
 
@@ -211,7 +202,7 @@ void BTUI::nextPaint() {
     int p_n{};
 
     if (p_c + 1 >= static_cast<int>(Paint::p_end) || p_c >= static_cast<int>(Paint::p_end)) {
-        p_n = static_cast<int>(Paint::p_begin);
+        p_n = static_cast<int>(Paint::p_main);
     } else {
         p_n = p_c + 1;
     }
@@ -219,25 +210,7 @@ void BTUI::nextPaint() {
     bufAppend(p_curr);
     needRender = true;
 }
-/*** raw ***/
-void BTUI::enableRaw() {
-         if (tcgetattr(STDIN_FILENO, &E.m_orig_termios) == -1) die("tcgetattr");
-        tcgetattr(STDIN_FILENO, &E.m_orig_termios);
-         struct termios raw = E.m_orig_termios;
 
-         tcgetattr(STDIN_FILENO, &raw);
-         raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
-         raw.c_oflag &= ~(OPOST);
-         raw.c_cflag &= ~(CS8);
-         raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
-         raw.c_cc[VMIN] = 0;
-         raw.c_cc[VTIME] = 1;
-
-        if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1) die("tcsetattr");
-    }
-constexpr void BTUI::disableRaw() const {
-    tcsetattr (STDIN_FILENO, TCSAFLUSH, &E.m_orig_termios);
-}
 /*** Color ***/
 void BTUI::resetClr() {
     write(STDOUT_FILENO, "\x1b[0m", 4);

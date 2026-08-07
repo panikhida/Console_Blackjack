@@ -16,11 +16,14 @@ public:
     static void refreshScreen();
     static void die(const char* s);
 
+    /*** raw ***/
+    void enableRaw();
+    constexpr void disableRaw() const;
+
     /*** buff ***/
     void bufAppend(std::string_view t);
     void bufAppend(int t);
     void bufAppend(Paint p);
-
     void bufClear();
 
     /*** gets ***/
@@ -32,10 +35,6 @@ public:
     void setPaint(Paint paint);
     void renderUi();
     void nextPaint();
-
-    /*** raw ***/
-    void enableRaw();
-    constexpr void disableRaw() const;
 
     /*** colors ***/
     static void resetClr();
