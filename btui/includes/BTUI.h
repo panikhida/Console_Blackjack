@@ -46,12 +46,12 @@ public:
     Paint p_curr;
 private:
     // std::size_t buf_s {2048};
-    struct Config {
+    struct Params {
         int scrHeight{0};
         int scrLength{0};
         struct termios m_orig_termios {};
     };
 #define BUF_INIT {NULL, 0}
-    struct Config E;
+    struct Params E;
 };
 #endif //CONSOLE_BLACKJACK_BTUI_H

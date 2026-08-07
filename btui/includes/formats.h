@@ -1,7 +1,7 @@
 #ifndef CONSOLE_BLACKJACK_FORMATS_H
 #define CONSOLE_BLACKJACK_FORMATS_H
-#include <string_view>
     enum class Color {
+        c_begin,
         black,
         red,
         green,
@@ -9,7 +9,8 @@
         blue,
         purple,
         cyan,
-        white
+        white,
+        c_end
     };
 
     constexpr unsigned int Clr(Color color) {
@@ -30,7 +31,7 @@
                 return 36;
             case Color::white:
             default:
-                return 37;
+                return 0;
         }
     }
 
