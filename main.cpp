@@ -1,7 +1,5 @@
 /*** includes ***/
 #include "game.h"
-#include "btui/includes/BTUI.h"
-/*** defines ***/
 /*** init ***/
 using enum Color;
 int main() {

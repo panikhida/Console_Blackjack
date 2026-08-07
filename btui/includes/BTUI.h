@@ -35,15 +35,18 @@ public:
     void setPaint(Paint paint);
     void renderUi();
     void nextPaint();
+    void insertText(int r, int c, std::string_view str);
+    void insertText(int r, int c, int n);
+
 
     /*** Color ***/
     static void resetClr();
     static void getClr();
-    static void setClr(int c);
+    void setClr(int c);
 
     /*** Logic ***/
     void checkChoice(Paint p, char iKey);
-
+    void updateMoney(int& m);
 
     std::string buf{};
     bool needRender{true};

@@ -31,9 +31,8 @@ void BTUI::initUI() {
     p_curr = Paint::p_main;
 }
 char BTUI::readKey() {
-    ssize_t nread;
     char c = '\0';
-    nread = read(STDIN_FILENO, &c, 1);
+    ssize_t nread = read(STDIN_FILENO, &c, 1);
 
         if (nread == -1 && errno != EAGAIN) {
             die("read");
@@ -41,9 +40,9 @@ char BTUI::readKey() {
     return (nread == 1) ? c : '\0';
 }
 void BTUI::processKeypress() {
-    const char c = readKey();
-    if (c == '\0') return;
-    switch (c) {
+    const char cc = readKey();
+    if (cc == '\0') return;
+    switch (cc) {
         case CTRL('q'): {
             buf.clear();
             write(STDOUT_FILENO, "\x1b[2J", 4);
@@ -56,7 +55,7 @@ void BTUI::processKeypress() {
             nextPaint();
         }
             case ('1'):case ('2'):case ('3'):case ('4'):case ('5'):case ('6'):case ('7'):case ('8'):case ('9'): case('0'):
-            checkChoice(p_curr, c);
+            checkChoice(p_curr, cc);
             default:
         break;
     }
@@ -212,6 +211,26 @@ void BTUI::nextPaint() {
     bufAppend(p_curr);
     needRender = true;
 }
+void BTUI::insertText(int rows, int colns, std::string_view str) {
+    std::string text{"\x1b["};
+    text += std::to_string(rows);
+    text += ";";
+    text += std::to_string(colns);
+    text += "H";
+    text += str;
+    bufAppend(text);
+    needRender = true;
+}
+void BTUI::insertText(int r, int c, int n) {
+    std::string text{"\x1b["};
+    text += std::to_string(r);
+    text += ";";
+    text += std::to_string(c);
+    text += "H";
+    text += n;
+    bufAppend(text);
+    needRender = true;
+}
 
 /*** Color ***/
 void BTUI::resetClr() {
@@ -221,6 +240,9 @@ void BTUI::getClr() {
     std::cout << "setclr wip";
 }
 void BTUI::setClr(int c) {
+    bufAppend("\x1b[");
+    bufAppend(std::to_string(c));
+    bufAppend("m");
 }
 
 /*** Logic ***/
@@ -236,10 +258,18 @@ void BTUI::checkChoice(Paint cur_paint, char iKey) {
                 case Paint::p_game: {
 
                 }
+                default:
+                    break;
             }
             default:
             break;
         }
     }
+
+}
+void BTUI::updateMoney(int& m) {
+    buf.clear();
+    setPaint(Paint::p_game);
+    insertText(9, E.scrHeight - 3, m);
 
 }

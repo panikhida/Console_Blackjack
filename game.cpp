@@ -1,6 +1,5 @@
 #include "includes.h"
 #include "game.h"
-
 bool hasUnextractedInput() {
     return !std::cin.eof() && std::cin.peek() != '\n';
 }
@@ -9,22 +8,7 @@ void ignoreLine() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-bool getBool() {
-    while (true) {
-        bool b{};
-        std::cin >> b;
-        if (!std::cin) {
-            std::cin.clear();
-            ignoreLine();
-            // std::cout << "Incorrect input, try again: ";
-            continue;
-        }
-        ignoreLine();
-        return b;
-    }
-}
-
-int getInt() {
+int BJ::getInt() {
     while (true) {
         int i{};
         std::cin >> i;
@@ -39,7 +23,7 @@ int getInt() {
     }
 }
 
-int getInt(int min, int max) {
+int BJ::getInt(int min, int max) {
     while (true) {
         int i{};
         std::cin >> i;
@@ -54,7 +38,7 @@ int getInt(int min, int max) {
     }
 }
 
-int askIfContinue() {
+int BJ::askIfContinue() {
     while (true) {
         int a;
         bool b;
@@ -77,13 +61,7 @@ int askIfContinue() {
     }
 }
 
-void initBlackJack() {
-    int cash { 100 };
-    int plr_win { 0 };
-    int dlr_win { 0 };
-    std::vector<Card> deck;
-    std::vector<Card> deck_plr;
-    std::vector<Card> deck_dlr;
+void BJ::initBlackJack() {
     while (cash > 0) {
         auto bid { 0 };
         fillDeck(deck);
