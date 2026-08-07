@@ -18,4 +18,6 @@ add_executable(Console_Blackjack main.cpp
         btui/src/converter.cpp
         btui/includes/converter.h
         btui/includes/paints.h
-        btui/src/paints.cpp)
+        btui/src/paints.cpp
+        btui/settings.cpp
+        btui/includes/settings.h)
