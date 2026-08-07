@@ -1,6 +1,5 @@
 /*** includes ***/
-// #include "includes.h"
-// #include <unistd.h>
+#include "game.h"
 #include "btui/includes/BTUI.h"
 /*** defines ***/
 /*** init ***/
