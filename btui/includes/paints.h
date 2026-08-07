@@ -11,9 +11,6 @@ enum class Paint {
     p_history,
     //
     p_end,
-    //templates
-    p_box,
-
 };
 
 inline std::string getPaint(Paint paint, int scrHeight, int scrLength) {
@@ -41,12 +38,14 @@ inline std::string getPaint(Paint paint, int scrHeight, int scrLength) {
             // insides
 
 
+
             return text;
         }
         case Paint::p_main: {
             text += "\x1b[" + std::to_string(1) + ";" + std::to_string(3) + "HMain";
             text += "\x1b[" + std::to_string(scrLength - 3) + ";" + std::to_string(scrHeight - 3) + "HBlackJack";
             // insides
+
 
 
             return text;
@@ -57,11 +56,13 @@ inline std::string getPaint(Paint paint, int scrHeight, int scrLength) {
             // insides
 
 
+
             return text;        }
         case Paint::p_settings: {
             text += "\x1b[" + std::to_string(1) + ";" + std::to_string(3) + "HSettings";
             text += "\x1b[" + std::to_string(scrLength - 3) + ";" + std::to_string(scrHeight - 3) + "HBlackJack";
             // insides
+
 
 
             return text;
@@ -72,6 +73,7 @@ inline std::string getPaint(Paint paint, int scrHeight, int scrLength) {
             // insides
 
 
+
             return text;
         }
         case Paint::p_end: {
@@ -80,12 +82,14 @@ inline std::string getPaint(Paint paint, int scrHeight, int scrLength) {
             // insides
 
 
+
             return text;
         }
         default:
             text += "\x1b[" + std::to_string(1) + ";" + std::to_string( 3) + "H404";
             text += "\x1b[" + std::to_string(scrHeight - 3) + ";" + std::to_string(scrLength - 3) + "HBlackJack";
             // insides
+
 
 
             return text;

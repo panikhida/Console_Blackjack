@@ -1,7 +1,3 @@
-//
-// Created by panikhida on 8/7/26.
-//
-
 #ifndef CONSOLE_BLACKJACK_SETTINGS_H
 #define CONSOLE_BLACKJACK_SETTINGS_H
 
