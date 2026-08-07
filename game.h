@@ -2,7 +2,7 @@
 #define CONSOLE_BLACKJACK_GAME_H
 #include "includes.h"
 #include "deck.h"
-void blackjack();
+void initBlackJack();
 bool getBool();
 int askIfContinue();
 int getInt();

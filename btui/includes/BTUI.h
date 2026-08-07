@@ -1,14 +1,14 @@
 #ifndef CONSOLE_BLACKJACK_BTUI_H
 #define CONSOLE_BLACKJACK_BTUI_H
-#include "formats.h"
 #include "paints.h"
+#include "settings.h"
 #include <termios.h>
 #include <string>
 
 // btui class help me
 class BTUI {
 public:
-    /*** basic ***/
+    /*** Basic ***/
     ~BTUI();
     void initUI();
     static char readKey();
@@ -16,34 +16,39 @@ public:
     static void refreshScreen();
     static void die(const char* s);
 
-    /*** raw ***/
+    /*** Raw ***/
     void enableRaw();
     constexpr void disableRaw() const;
 
-    /*** buff ***/
+    /*** Buff ***/
     void bufAppend(std::string_view t);
     void bufAppend(int t);
     void bufAppend(Paint p);
     void bufClear();
 
-    /*** gets ***/
+    /*** Gets ***/
     static int getTSize(int* rows, int* columns);
     void checkSize();
     // int getCursorPos(int* rows, int* columns);
 
-    /*** paints ***/
+    /*** Paints ***/
     void setPaint(Paint paint);
     void renderUi();
     void nextPaint();
 
-    /*** colors ***/
+    /*** Color ***/
     static void resetClr();
     static void getClr();
     static void setClr(int c);
 
+    /*** Logic ***/
+    void checkChoice(Paint p, char iKey);
+
+
     std::string buf{};
     bool needRender{true};
     Paint p_curr;
+    struct Config c;
 private:
     // std::size_t buf_s {2048};
     struct Params {
