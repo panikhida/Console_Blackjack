@@ -1,6 +1,7 @@
 #ifndef CONSOLE_BLACKJACK_BTUI_H
 #define CONSOLE_BLACKJACK_BTUI_H
 #include "formats.h"
+#include "paints.h"
 #include <termios.h>
 #include <string>
 
@@ -17,6 +18,9 @@ public:
 
     /*** buff ***/
     void bufAppend(std::string_view t);
+    void bufAppend(int t);
+    void bufAppend(Paint p);
+
     void bufClear();
 
     /*** gets ***/
@@ -24,9 +28,12 @@ public:
     // int getCursorPos(int* rows, int* columns);
 
     /*** paints ***/
+    void setPaint(Paint paint);
     void p_drawLBorder(std::string_view c);
     void p_drawBox();
-    void renderUi() const;
+    void renderUi();
+
+    void nextPaint();
     /*** raw ***/
     void enableRaw();
     constexpr void disableRaw() const;
@@ -38,7 +45,7 @@ public:
 
     std::string buf{};
     bool needRender{false};
-
+    Paint p_curr;
 private:
     // std::size_t buf_s {2048};
     struct Config {
