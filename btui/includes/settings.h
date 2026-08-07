@@ -6,4 +6,5 @@ struct Config {
     bool debugMode{false};
     Color uiColor {Color::green};
 };
+
 #endif //CONSOLE_BLACKJACK_SETTINGS_H

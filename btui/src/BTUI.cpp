@@ -41,7 +41,7 @@ char BTUI::readKey() {
     return (nread == 1) ? c : '\0';
 }
 void BTUI::processKeypress() {
-    char c = readKey();
+    const char c = readKey();
     if (c == '\0') return;
     switch (c) {
         case CTRL('q'): {
@@ -55,7 +55,9 @@ void BTUI::processKeypress() {
             case CTRL('a'): {
             nextPaint();
         }
-        default:
+            case ('1'):case ('2'):case ('3'):case ('4'):case ('5'):case ('6'):case ('7'):case ('8'):case ('9'): case('0'):
+            checkChoice(p_curr, c);
+            default:
         break;
     }
 }
@@ -219,4 +221,25 @@ void BTUI::getClr() {
     std::cout << "setclr wip";
 }
 void BTUI::setClr(int c) {
+}
+
+/*** Logic ***/
+void BTUI::checkChoice(Paint cur_paint, char iKey) {
+
+    switch (iKey) {
+        case '1': {
+            switch (cur_paint) {
+                case Paint::p_main: {
+                    nextPaint();
+                    break;
+                }
+                case Paint::p_game: {
+
+                }
+            }
+            default:
+            break;
+        }
+    }
+
 }

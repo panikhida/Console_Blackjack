@@ -1,7 +1,6 @@
 #ifndef CONSOLE_BLACKJACK_PAINTS_H
 #define CONSOLE_BLACKJACK_PAINTS_H
 #include <string>
-
 enum class Paint {
     p_begin,
     //
@@ -12,12 +11,10 @@ enum class Paint {
     //
     p_end,
 };
-
 inline std::string getPaint(Paint paint, int scrHeight, int scrLength) {
     std::string text;
     text += "\x1b[32m"; //colur
     text += "╭";
-    std::string_view welcome {"BlackJack"};
     for (int y{0}; y < scrLength - 2; ++y) text +=("━");
     text += "╮\r\n";
     for (int y{0}; y < scrHeight - 2; ++y) {
