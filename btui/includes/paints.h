@@ -1,7 +1,7 @@
 #ifndef CONSOLE_BLACKJACK_PAINTS_H
 #define CONSOLE_BLACKJACK_PAINTS_H
 #include <string>
-std::string text;
+
 enum class Paint {
     p_begin,
     p_main,
@@ -10,52 +10,163 @@ enum class Paint {
     p_history,
     p_end
 };
-constexpr std::string_view getPaint(Paint paint) {
+inline std::string getPaint(Paint paint, int scrHeight, int scrLength) {
     switch (paint) {
         case Paint::p_begin: {
-            /*     buf.clear();
-    std::string_view welcome {"BlackJack"};
-    bufAppend("\x1b[32m");
-    bufAppend("╭");
+            std::string text;
+            text += "\x1b[32m"; //colur
+            text += "╭";
+            std::string_view welcome {"BlackJack"};
 
-    for (int y{0}; y < E.scrLength - 2; ++y) bufAppend("━");
-    bufAppend("╮\r\n");
-    for (int y{0}; y < E.scrHeight - 2; ++y) {
-        bufAppend("|");
-        for (int s{0}; s < E.scrLength - welcome.size() - 2; ++s) {
-            bufAppend(".");
-            if (s == E.scrLength / 2 - welcome.size() / 2 - 2) {
-                bufAppend(welcome);
+            for (int y{0}; y < scrLength - 2; ++y) text +=("━");
+            text += "╮\r\n";
+            for (int y{0}; y < scrHeight - 2; ++y) {
+                text += ("|");
+                for (int s{0}; s < scrLength - welcome.size() - 2; ++s) {
+                    text += (".");
+                    if (s == scrLength / 2 - welcome.size() / 2 - 2) {
+                        text += (welcome);
+                    }
+                }
+                text += ("|\r\n");
             }
-        }
-        bufAppend("|\r\n");
-    }
-    bufAppend("╰");
-    for (int y{0}; y < E.scrLength - 2; ++y) bufAppend("━");
-    bufAppend("╯");
-    needRender = true;*/
-            text += "\x1b[32m";
-
+            text += ("╰");
+            for (int y{0}; y < scrLength - 2; ++y) text += ("━");
+            text += ("╯");
             return text;
         }
         case Paint::p_main: {
-            return "main\r\n1";
+            std::string text;
+            text += "\x1b[32m"; //colur
+            text += "╭";
+            std::string_view welcome {"Main"};
+
+            for (int y{0}; y < scrLength - 2; ++y) text +=("━");
+            text += "╮\r\n";
+            for (int y{0}; y < scrHeight - 2; ++y) {
+                text += ("|");
+                for (int s{0}; s < scrLength - welcome.size() - 2; ++s) {
+                    text += (".");
+                    if (s == scrLength / 2 - welcome.size() / 2 - 2) {
+                        text += (welcome);
+                    }
+                }
+                text += ("|\r\n");
+            }
+            text += ("╰");
+            for (int y{0}; y < scrLength - 2; ++y) text += ("━");
+            text += ("╯");
+            return text;
         }
         case Paint::p_game: {
-            return "game\r\n2";
-        }
+            std::string text;
+            text += "\x1b[32m"; //colur
+            text += "╭";
+            std::string_view welcome {"Game"};
+
+            for (int y{0}; y < scrLength - 2; ++y) text +=("━");
+            text += "╮\r\n";
+            for (int y{0}; y < scrHeight - 2; ++y) {
+                text += ("|");
+                for (int s{0}; s < scrLength - welcome.size() - 2; ++s) {
+                    text += (".");
+                    if (s == scrLength / 2 - welcome.size() / 2 - 2) {
+                        text += (welcome);
+                    }
+                }
+                text += ("|\r\n");
+            }
+            text += ("╰");
+            for (int y{0}; y < scrLength - 2; ++y) text += ("━");
+            text += ("╯");
+            return text;        }
         case Paint::p_settings: {
-            return "settings\r\n3";
-        }
+            std::string text;
+            text += "\x1b[32m"; //colur
+            text += "╭";
+            std::string_view welcome {"Settings"};
+
+            for (int y{0}; y < scrLength - 2; ++y) text +=("━");
+            text += "╮\r\n";
+            for (int y{0}; y < scrHeight - 2; ++y) {
+                text += ("|");
+                for (int s{0}; s < scrLength - welcome.size() - 2; ++s) {
+                    text += (".");
+                    if (s == scrLength / 2 - welcome.size() / 2 - 2) {
+                        text += (welcome);
+                    }
+                }
+                text += ("|\r\n");
+            }
+            text += ("╰");
+            for (int y{0}; y < scrLength - 2; ++y) text += ("━");
+            text += ("╯");
+            return text;        }
         case Paint::p_history: {
-            return "history\r\n4";
-        }
+            std::string text;
+            text += "\x1b[32m"; //colur
+            text += "╭";
+            std::string_view welcome {"History"};
+
+            for (int y{0}; y < scrLength - 2; ++y) text +=("━");
+            text += "╮\r\n";
+            for (int y{0}; y < scrHeight - 2; ++y) {
+                text += ("|");
+                for (int s{0}; s < scrLength - welcome.size() - 2; ++s) {
+                    text += (".");
+                    if (s == scrLength / 2 - welcome.size() / 2 - 2) {
+                        text += (welcome);
+                    }
+                }
+                text += ("|\r\n");
+            }
+            text += ("╰");
+            for (int y{0}; y < scrLength - 2; ++y) text += ("━");
+            text += ("╯");
+            return text;        }
         case Paint::p_end: {
-            return "wrong painting. paint - end";
-        }
+            std::string text;
+            text += "\x1b[32m"; //colur
+            text += "╭";
+            std::string_view welcome {"End"};
+
+            for (int y{0}; y < scrLength - 2; ++y) text +=("━");
+            text += "╮\r\n";
+            for (int y{0}; y < scrHeight - 2; ++y) {
+                text += ("|");
+                for (int s{0}; s < scrLength - welcome.size() - 2; ++s) {
+                    text += (".");
+                    if (s == scrLength / 2 - welcome.size() / 2 - 2) {
+                        text += (welcome);
+                    }
+                }
+                text += ("|\r\n");
+            }
+            text += ("╰");
+            for (int y{0}; y < scrLength - 2; ++y) text += ("━");
+            text += ("╯");
+            return text;        }
         default:
-            return "painting error";
-            break;
-    }
+            std::string text;
+            text += "\x1b[32m"; //colur
+            text += "╭";
+            std::string_view welcome {"Default"};
+
+            for (int y{0}; y < scrLength - 2; ++y) text +=("━");
+            text += "╮\r\n";
+            for (int y{0}; y < scrHeight - 2; ++y) {
+                text += ("|");
+                for (int s{0}; s < scrLength - welcome.size() - 2; ++s) {
+                    text += (".");
+                    if (s == scrLength / 2 - welcome.size() / 2 - 2) {
+                        text += (welcome);
+                    }
+                }
+                text += ("|\r\n");
+            }
+            text += ("╰");
+            for (int y{0}; y < scrLength - 2; ++y) text += ("━");
+            text += ("╯");
+            return text;    }
 }
 #endif //CONSOLE_BLACKJACK_PAINTS_H

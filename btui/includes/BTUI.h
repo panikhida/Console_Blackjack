@@ -25,15 +25,14 @@ public:
 
     /*** gets ***/
     static int getTSize(int* rows, int* columns);
+    void checkSize();
     // int getCursorPos(int* rows, int* columns);
 
     /*** paints ***/
     void setPaint(Paint paint);
-    void p_drawLBorder(std::string_view c);
-    void p_drawBox();
     void renderUi();
-
     void nextPaint();
+
     /*** raw ***/
     void enableRaw();
     constexpr void disableRaw() const;
@@ -44,7 +43,7 @@ public:
     static void setClr(int c);
 
     std::string buf{};
-    bool needRender{false};
+    bool needRender{true};
     Paint p_curr;
 private:
     // std::size_t buf_s {2048};

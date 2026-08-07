@@ -28,17 +28,17 @@ void BTUI::initUI() {
         paint = static_cast<Paint>(r);
         g_paintsAll.push_back(paint);
     }
-    p_curr = Paint::p_main;
+    p_curr = Paint::p_begin;
 }
 char BTUI::readKey() {
-    int nread;
+    ssize_t nread;
     char c = '\0';
-    while ((nread = read(STDIN_FILENO, &c, 1)) !=1) {
+    nread = read(STDIN_FILENO, &c, 1);
+
         if (nread == -1 && errno != EAGAIN) {
             die("read");
         }
-    }
-    return c;
+    return (nread == 1) ? c : '\0';
 }
 void BTUI::processKeypress() {
     char c = readKey();
@@ -60,7 +60,6 @@ void BTUI::processKeypress() {
     }
 }
 void BTUI::refreshScreen() {
-    write(STDOUT_FILENO, "\x1b[2J", 4);
     write(STDOUT_FILENO,"\x1b[H", 3);
 }
 void BTUI::die(const char* s) {
@@ -83,7 +82,7 @@ void BTUI::bufAppend(int t) {
 }
 void BTUI::bufAppend(Paint p) {
     std::string text;
-    text += getPaint(p);
+    text += getPaint(p, E.scrHeight, E.scrLength);
     buf.append(text);
 }
 
@@ -106,40 +105,60 @@ int BTUI::getTSize(int *height, int *length) {
         return 0;
     }
 }
+void BTUI::checkSize() {
+    int nH, nL;
+    if (getTSize(&nH, &nL) == 0) {
+        if (nH != E.scrHeight || nL != E.scrLength) {
+            E.scrHeight = nH;
+            E.scrLength = nL;
 
+            bufClear();
+            bufAppend(p_curr);
+            needRender = true;
+        }
+    }
+}
 std::string_view nl {"\r\n"};
 
-void BTUI::p_drawBox() {
-    buf.clear();
-    std::string_view welcome {"BlackJack"};
-    bufAppend("\x1b[32m");
-    bufAppend("╭");
-
-    for (int y{0}; y < E.scrLength - 2; ++y) bufAppend("━");
-    bufAppend("╮\r\n");
-    for (int y{0}; y < E.scrHeight - 2; ++y) {
-        bufAppend("|");
-        for (int s{0}; s < E.scrLength - welcome.size() - 2; ++s) {
-            bufAppend(".");
-            if (s == E.scrLength / 2 - welcome.size() / 2 - 2) {
-                bufAppend(welcome);
-            }
-        }
-        bufAppend("|\r\n");
-    }
-    bufAppend("╰");
-    for (int y{0}; y < E.scrLength - 2; ++y) bufAppend("━");
-    bufAppend("╯");
-    needRender = true;
-
-}
+// void BTUI::p_drawBox() {
+//     buf.clear();
+//     std::string_view welcome {"BlackJack"};
+//     bufAppend("\x1b[32m");
+//     bufAppend("╭");
+//
+//     for (int y{0}; y < E.scrLength - 2; ++y) bufAppend("━");
+//     bufAppend("╮\r\n");
+//     for (int y{0}; y < E.scrHeight - 2; ++y) {
+//         bufAppend("|");
+//         for (int s{0}; s < E.scrLength - welcome.size() - 2; ++s) {
+//             bufAppend(".");
+//             if (s == E.scrLength / 2 - welcome.size() / 2 - 2) {
+//                 bufAppend(welcome);
+//             }
+//         }
+//         bufAppend("|\r\n");
+//     }
+//     bufAppend("╰");
+//     for (int y{0}; y < E.scrLength - 2; ++y) bufAppend("━");
+//     bufAppend("╯");
+//     needRender = true;
+//
+// }
 
 /*** Paints ***/
 void BTUI::setPaint(Paint paint) {
     switch (paint) {
+        case(Paint::p_begin): {
+            bufClear();
+            bufAppend(getPaint(Paint::p_begin, E.scrHeight, E.scrLength));
+            needRender = true;
+            p_curr = Paint::p_begin;
+
+            break;
+        }
         case(Paint::p_main): {
             bufClear();
-            bufAppend(getPaint(Paint::p_main));
+            bufAppend(getPaint(Paint::p_main, E.scrHeight, E.scrLength));
             needRender = true;
             p_curr = Paint::p_main;
 
@@ -148,7 +167,7 @@ void BTUI::setPaint(Paint paint) {
 
         case(Paint::p_game): {
             bufClear();
-            bufAppend(getPaint(Paint::p_game));
+            bufAppend(getPaint(Paint::p_game, E.scrHeight, E.scrLength));
             needRender = true;
             p_curr = Paint::p_game;
 
@@ -157,7 +176,7 @@ void BTUI::setPaint(Paint paint) {
 
         case(Paint::p_settings): {
             bufClear();
-            bufAppend(getPaint(Paint::p_settings));
+            bufAppend(getPaint(Paint::p_settings, E.scrHeight, E.scrLength));
             needRender = true;
             p_curr = Paint::p_settings;
 
@@ -166,7 +185,7 @@ void BTUI::setPaint(Paint paint) {
 
         case(Paint::p_history): {
             bufClear();
-            bufAppend(getPaint(Paint::p_history));
+            bufAppend(getPaint(Paint::p_history, E.scrHeight, E.scrLength));
             needRender = true;
             p_curr = Paint::p_history;
 
@@ -176,15 +195,6 @@ void BTUI::setPaint(Paint paint) {
         default:
             break;
     }
-}
-void BTUI::p_drawLBorder(std::string_view c)  {
-    for (int y{0}; y < E.scrHeight;++y) {
-        bufAppend(c);
-        if (y < E.scrHeight - 1) {
-            bufAppend(nl);
-        }
-    }
-    bufAppend("\x1b[H");
 }
 
 void BTUI::renderUi() {

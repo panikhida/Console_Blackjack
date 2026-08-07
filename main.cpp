@@ -12,9 +12,8 @@ int main() {
   tui.setPaint(tui.p_curr);
 
   while (true) {
+    tui.checkSize();
     if (tui.needRender) tui.renderUi();
-
     tui.processKeypress();
-    if (tui.needRender) tui.renderUi();
   }
 }
