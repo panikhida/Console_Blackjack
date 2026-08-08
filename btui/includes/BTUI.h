@@ -4,6 +4,7 @@
 #include "settings.h"
 #include <termios.h>
 #include <string>
+#include "../../game.h"
 
 // btui class help me
 class BTUI {
@@ -15,7 +16,7 @@ public:
     void processKeypress();
     static void refreshScreen();
     static void die(const char* s);
-
+    void linkGame(BJ* game);
     /*** Raw ***/
     void enableRaw();
     constexpr void disableRaw() const;
@@ -52,6 +53,8 @@ public:
     bool needRender{true};
     Paint p_curr;
     struct Config c;
+    BJ* m_game {nullptr};
+
 private:
     // std::size_t buf_s {2048};
     struct Params {

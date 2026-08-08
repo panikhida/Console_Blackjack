@@ -1,5 +1,7 @@
 #include "includes.h"
 #include "game.h"
+#include "btui/includes/BTUI.h"
+
 bool hasUnextractedInput() {
     return !std::cin.eof() && std::cin.peek() != '\n';
 }
@@ -62,10 +64,12 @@ int BJ::askIfContinue() {
 }
 
 void BJ::initBlackJack() {
-    while (cash > 0) {
-        auto bid { 0 };
         fillDeck(deck);
         shuffleDeck(deck);
+    }
+void BJ::playBJ(){
+    while (cash > 0) {
+        initBlackJack();
         // std::cout << "\nRound started, your balance is " << cash << "$\nChoose your bid: ";
         bid = getInt();
         // std::cout << "\nYour bid is " << bid << "$\n\n";
@@ -164,4 +168,26 @@ void BJ::initBlackJack() {
     }
     // std::cout << "Game ended.\n";
     // std::cout << "Player: " << plr_win << " | Dealer: " << dlr_win << ".\n";
+}
+
+/*** Tools ***/
+void BJ::changeMoney(int m) {
+    cash = cash + m;
+}
+void BJ::changeBid(int b) {
+    bid = bid + b;
+}
+void BJ::addCash() {
+    cash += 50;
+}
+
+void BJ::decreaseCash() {
+    cash -= 50;
+}
+
+void BJ::addBid() {
+    bid += 50;
+}
+void BJ::decreaseBid() {
+    bid -= 50;
 }

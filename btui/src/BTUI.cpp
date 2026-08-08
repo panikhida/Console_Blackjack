@@ -10,6 +10,10 @@
 #include <vector>
 #include "../../includes.h"
 #include "../includes/paints.h"
+using BJ::State::BID;
+using BJ::State::PLAYER;
+using BJ::State::INIT;
+using BJ::State::END;
 std::vector<Paint> g_paintsAll;
 /*** basic ***/
 BTUI::~BTUI() {
@@ -71,7 +75,9 @@ void BTUI::die(const char* s) {
     perror(s);
     exit(1);
 }
-
+void BTUI::linkGame(BJ* game) {
+    m_game = game;
+}
 /*** raw ***/
 void BTUI::enableRaw() {
     if (tcgetattr(STDIN_FILENO, &E.m_orig_termios) == -1) die("tcgetattr");
@@ -221,13 +227,13 @@ void BTUI::insertText(int rows, int colns, std::string_view str) {
     bufAppend(text);
     needRender = true;
 }
-void BTUI::insertText(int r, int c, int n) {
+void BTUI::insertText(int r, int co, int n) {
     std::string text{"\x1b["};
     text += std::to_string(r);
     text += ";";
-    text += std::to_string(c);
+    text += std::to_string(co);
     text += "H";
-    text += n;
+    text += std::to_string(n);
     bufAppend(text);
     needRender = true;
 }
@@ -239,9 +245,9 @@ void BTUI::resetClr() {
 void BTUI::getClr() {
     std::cout << "setclr wip";
 }
-void BTUI::setClr(int c) {
+void BTUI::setClr(int clr) {
     bufAppend("\x1b[");
-    bufAppend(std::to_string(c));
+    bufAppend(std::to_string(clr));
     bufAppend("m");
 }
 
@@ -253,10 +259,23 @@ void BTUI::checkChoice(Paint cur_paint, char iKey) {
             switch (cur_paint) {
                 case Paint::p_main: {
                     nextPaint();
+                    m_game->curr_state = BID;
                     break;
                 }
-                case Paint::p_game: {
 
+                case Paint::p_game: {
+                    switch (m_game->curr_state == BID) {
+                        case true:
+                            bufAppend("\x1b[");
+                            bufAppend(E.scrHeight - 3);
+                            bufAppend(";");
+                            bufAppend(10);
+                            bufAppend(std::to_string(m_game->cash));
+                            bufAppend("H");
+                            m_game->addCash();
+                            needRender = true;
+                            break;
+                    }
                 }
                 default:
                     break;
@@ -271,5 +290,4 @@ void BTUI::updateMoney(int& m) {
     buf.clear();
     setPaint(Paint::p_game);
     insertText(9, E.scrHeight - 3, m);
-
 }
